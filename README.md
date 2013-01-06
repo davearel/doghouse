@@ -16,4 +16,4 @@ Dave Arel       - @davearel
 
 Node boilerplate:
 -----------------
-https://github.com/twilson63/express-coffee/blob/master/Cakefile
+https://github.com/twilson63/express-coffee
