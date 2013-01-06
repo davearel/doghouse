@@ -23,9 +23,18 @@ app.configure 'production', 'development', 'testing', ->
 # helpers
 app.configure ->
   app.use (req, res, next) ->
+    # make the config available throughout the application
     res.locals.config = config
+    
+    # url helpers
+    ## TODO: Create a file structure for these, we want to keep this file lighter
     res.locals.github_connect_url = 'https://github.com/login/oauth/authorize?client_id='+config.GITHUB_CLIENT_ID+'&scope=repo'
     res.locals.logout_path = '/users/logout'
+    res.locals.issues_path = '/issues'
+    res.locals.root_path = '/'
+
+    # template helpers
+    ## TODO: Create a file structure for these, we want to keep this file lighter
     res.locals.loggedIn = () ->
       ! _.isEmpty req.session
     next()
