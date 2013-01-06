@@ -46,9 +46,10 @@ html(lang='en')
                   li
                     a(href='#') One more separated link
             form.navbar-form.pull-right
-              input.span2(type='text', placeholder='Email')
-              input.span2(type='password', placeholder='Password')
-              button.btn(type='submit') Sign in
+              if loggedIn()
+                a(href=logout_path) Sign out
+              else 
+                a(href=github_connect_url).btn Sign in with GitHub
 
     .container
       block hero_unit

@@ -27,7 +27,12 @@ module.exports  = (app) ->
     res.render '404', 404
 
 # render the page based on controller name, method and id
-routeMvc = (controllerName, methodName, req, res, next) ->
+routeMvc = (controllerName, methodName, req, res, next) =>
+  # this is a very dynamic application, and we don't want any caching
+  res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.header("Pragma", "no-cache");
+  res.header("Expires", 0);
+  # route onto a controller mathod
   controllerName = 'index' if not controllerName?
   controller = null
   try
