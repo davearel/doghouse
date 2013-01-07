@@ -1,0 +1,50 @@
+.label
+  font-weight normal
+  font-size: 11px
+  text-shadow none
+  padding 0 7px
+  line-height 23px
+  margin 0 5px 5px 0
+  position relative
+  box-shadow inset 0 0 0 1px rgba(0,0,0,0.1)
+
+  &.remove
+    padding-right 29px
+
+  .remove
+    background url(../images/x_remove.svg) 50% 8px no-repeat
+    text-indent -999em
+    border-left 1px solid rgba(0,0,0,0.1)
+    position absolute
+    top 0
+    right 0
+    width 22px
+    cursor pointer
+    border-radius 0 3px 3px 0
+    &:hover
+      background-color rgba(0,0,0,0.08)
+
+  &.green
+    background bgreen
+  &.orange
+    background borange
+  &.blue
+    background bblue
+  &.yellow
+    background byellow
+
+  &.clear
+    background white
+    color grey_9
+    padding-left 19px
+    cursor pointer
+    &:hover
+      background grey_fa
+
+    .remove
+      border-left 0
+      right auto
+      left 0
+      background-position 50% -11px
+      &:hover
+        background-color rgba(0,0,0,0)

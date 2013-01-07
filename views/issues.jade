@@ -1,3 +1,55 @@
 extends layout
 block page_content
-  p hello Flop
+  
+  .content
+    #filter
+      #filter-group
+        .btn-group.title
+          span Filter Issues
+
+        .btn-group.green
+          a.btn.dropdown-toggle(href="#", data-toggle="dropdown") By Person
+            span.caret
+          .dropdown-menu
+            p dude
+
+        .btn-group.orange
+          a.btn.dropdown-toggle(href="#", data-toggle="dropdown") By Week
+            span.caret
+          .dropdown-menu
+            p dude
+
+        .btn-group.blue
+          a.btn.dropdown-toggle(href="#", data-toggle="dropdown") By Repo
+            span.caret
+          .dropdown-menu
+            p dude
+
+        .btn-group.yellow
+          a.btn.dropdown-toggle(href="#", data-toggle="dropdown") By Project
+            span.caret
+          .dropdown-menu
+            p dude
+
+      #filter-applied
+        span.label Applied Filters
+        span.label.remove.green davearel
+          span.remove x
+        span.label.remove.green kylefoundry
+          span.remove x
+        span.label.remove.orange Week of 1/28
+          span.remove x
+        span.label.remove.blue mercante
+          span.remove x
+        span.label.remove.blue android
+          span.remove x
+        span.label.remove.yellow Android Redesign
+          span.remove x
+        span.label.clear
+          span.remove x
+          span Clear All
+
+  #issues.grey-bg
+    .content
+      .section-header
+        h1 18 Issues
