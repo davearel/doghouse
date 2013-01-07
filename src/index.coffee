@@ -1,13 +1,9 @@
-express = require 'express'
-stylus = require 'stylus'
-assets = require 'connect-assets'
+express  = require 'express'
+stylus   = require 'stylus'
+assets   = require 'connect-assets'
 mongoose = require 'mongoose'
-GitHubApi = require 'github'
-_ = require 'underscore'
-
-github = new GitHubApi
-  version: "3.0.0",
-  timeout: 5000
+memcache = require 'memcache'
+_        = require 'underscore'
 
 # Create app instance.
 app = express()
@@ -20,12 +16,32 @@ config = require "./config"
 app.configure 'production', 'development', 'testing', ->
   config.setEnvironment app.settings.env
 
+# mongodb connection
+mongoose.connect 'mongodb://localhost/example'
+
+# memcached client
+memcache = new memcache.Client(config.MEMCACHED_PORT, config.MEMCACHED_HOST)
+memcache.on 'connect', () ->
+    console.log 'memcache connected'
+
+memcache.on 'close', () ->
+    console.log 'memcache closed'
+
+memcache.on 'timeout', () ->
+    console.log 'memcache timeout'
+
+memcache.on 'error', (e) ->
+    console.log 'memcache error'
+    console.log e
+
+memcache.connect()
+
 # helpers
 app.configure ->
   app.use (req, res, next) ->
     # make the config available throughout the application
     res.locals.config = config
-    
+
     # url helpers
     ## TODO: Create a file structure for these, we want to keep this file lighter
     res.locals.github_connect_url = 'https://github.com/login/oauth/authorize?client_id='+config.GITHUB_CLIENT_ID+'&scope=repo'
@@ -33,15 +49,15 @@ app.configure ->
     res.locals.issues_path = '/issues'
     res.locals.root_path = '/'
 
+    # memcache and mongoose
+    res.locals.memcache = memcache
+    res.locals.mongoose = mongoose
+
     # template helpers
     ## TODO: Create a file structure for these, we want to keep this file lighter
     res.locals.loggedIn = () ->
       ! _.isEmpty req.session
     next()
-
-
-# mongodb connection
-mongoose.connect 'mongodb://localhost/example'
 
 # sessions in cookies
 app.use(express.cookieParser(config.COOKIE_SECRET))
