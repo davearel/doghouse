@@ -43,6 +43,11 @@ app.configure ->
     res.locals.github_connect_url = 'https://github.com/login/oauth/authorize?client_id='+config.GITHUB_CLIENT_ID+'&scope=repo'
     res.locals.logout_path = '/users/logout'
     res.locals.issues_path = '/issues'
+    # events
+    res.locals.events_path = '/events'
+    res.locals.new_event_path = '/events/add'
+    res.locals.create_event_path = '/events/create'
+    # 
     res.locals.root_path = '/'
 
     # memcache and mongoose
