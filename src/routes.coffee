@@ -18,7 +18,7 @@ module.exports  = (app) ->
     routeMvc(req.params.controller, req.params.method, req, res, next)
 
   # - _/**:controller**/**:method**/**:id**_ -> controllers/***:controller***/***:method*** method with ***:id*** param passed
-  app.all '/:controller/:method/:id', (req, res, next) ->
+  app.all '/:controller/:id/:method', (req, res, next) ->
     routeMvc(req.params.controller, req.params.method, req, res, next)
 
   # If all else failed, show 404 page

@@ -1,0 +1,23 @@
+extends ../layout
+block page_content
+  form.form-horizontal(method='Post', action=typeof event === 'undefined' ? create_event_path : update_event_path(event))
+    fieldset
+      legend 
+       = typeof event === 'undefined' ? 'Add an' : 'Edit'
+        &nbsp;Event
+      div.control-group
+        label.control-label(for='inputName') Event Name
+        div.controls
+          input#inputEventName(type='text', name="name", value=typeof event === 'undefined' ? null : event.name)
+      div.control-group
+        label.control-label(for='inputWhenAt') When is it
+        div.controls
+          input#inputEventName(type='text', name="when_at", data-date-format="dd-mm-yyyy", value=typeof event === 'undefined' ? null : event.when_at).datepicker
+      div.control-group
+        label.control-label(for='eventNotes') Notes
+        div.controls
+          textarea#inputNotes(name="notes")= typeof event === 'undefined' ? null : event.notes
+      div.form-actions
+        button.btn(type='submit').btn-primary 
+          = typeof event === 'undefined' ? 'Create' : 'Update'
+        button.btn(type='button', onclick='window.location.href = "'+events_path+'"').btn Cancel

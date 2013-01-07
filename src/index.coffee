@@ -17,7 +17,7 @@ app.configure 'production', 'development', 'testing', ->
   config.setEnvironment app.settings.env
 
 # mongodb connection
-mongoose.connect 'mongodb://localhost/example'
+mongoose.connect 'mongodb://localhost/doghouse'
 
 # memcached client
 memcache = new memcache.Client(config.MEMCACHED_PORT, config.MEMCACHED_HOST)
@@ -45,8 +45,14 @@ app.configure ->
     res.locals.issues_path = '/issues'
     # events
     res.locals.events_path = '/events'
-    res.locals.new_event_path = '/events/add'
+    res.locals.new_event_path = '/events/new'
     res.locals.create_event_path = '/events/create'
+    res.locals.edit_event_path = (event) ->
+      '/events/'+event.id+'/edit'
+    res.locals.update_event_path = (event) ->
+      '/events/'+event.id+'/update'
+    res.locals.delete_event_path = (event) ->
+      '/events/'+event.id+'/delete'
     # 
     res.locals.root_path = '/'
 
