@@ -2,7 +2,12 @@
   "development" : {
     "github": {
       "client_id": "1a2b3c4d5c",
-      "secret": "q1w2e3r4t5y6u7i8o9"
+      "secret": "q1w2e3r4t5y6u7i8o9",
+      "organization": "bellycard"
+    },
+    "memcached": {
+      "port": "11211",
+      "host": "localhost"
     },
     "session_secret": "random_string_here"
     "cookie_secret": "random_string_here"
@@ -10,7 +15,8 @@
   "testing" : {
     "github": {
       "client_id": "1a2b3c4d5c",
-      "secret": "q1w2e3r4t5y6u7i8o9"
+      "secret": "q1w2e3r4t5y6u7i8o9",
+      "organization": "bellycard"
     }
   }
 }

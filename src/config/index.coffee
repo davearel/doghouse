@@ -20,6 +20,10 @@ exports.setEnvironment = (env) ->
       # github
       exports.GITHUB_CLIENT_ID = settings.github.client_id
       exports.GITHUB_SECRET = settings.github.secret
+      exports.GITHUB_ORGANIZATION = settings.github.organization
+      # memcached
+      exports.MEMCACHED_PORT = settings.memcached.port
+      exports.MEMCACHED_HOST = settings.memcached.host
       # cookies
       exports.COOKIE_SECRET = settings.cookie_secret
       # sessions
