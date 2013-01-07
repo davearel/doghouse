@@ -52,4 +52,23 @@ block page_content
   #issues.grey-bg
     .content
       .section-header
-        h1 18 Issues
+        h1.pull-left 18 Issues
+
+        .list-style.pull-right
+          .btn-group
+            button.btn.active
+              i.icon-th-large
+            button.btn
+              i.icon-align-justify
+
+        .sorting.pull-right
+          label.pull-left Sort by
+          select.pull-left
+            option First Created
+            option Last Updated
+
+      .issue-list.row-fluid
+        .issue.span6
+          p sups
+        .issue.span6
+         p nah
