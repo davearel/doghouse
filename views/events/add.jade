@@ -1,0 +1,20 @@
+extends ../layout
+block page_content
+  form.form-horizontal(method='Post', action=create_event_path)
+    fieldset
+      legend Add an Event
+      div.control-group
+        label.control-label(for='inputName') Event Name
+        div.controls
+          input#inputEventName(type='text', name="eventName")
+      div.control-group
+        label.control-label(for='inputWhenAt').datepicker When is it
+        div.controls
+          input#inputEventName(type='text', name="eventWhenAt")
+      div.control-group
+        label.control-label(for='inputDescription') Description
+        div.controls
+          textarea#inputDescription(name="eventDescription")
+      div.form-actions
+        button.btn(type='submit').btn-primary Create
+        button.btn(type='button', onclick='window.location.href = "'+events_path+'"').btn Cancel
