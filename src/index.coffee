@@ -22,18 +22,14 @@ mongoose.connect 'mongodb://localhost/example'
 # memcached client
 memcache = new memcache.Client(config.MEMCACHED_PORT, config.MEMCACHED_HOST)
 memcache.on 'connect', () ->
-    console.log 'memcache connected'
-
+  console.log 'memcache connected'
 memcache.on 'close', () ->
-    console.log 'memcache closed'
-
+  console.log 'memcache closed'
 memcache.on 'timeout', () ->
-    console.log 'memcache timeout'
-
+  console.log 'memcache timeout'
 memcache.on 'error', (e) ->
-    console.log 'memcache error'
-    console.log e
-
+  console.log 'memcache error'
+  console.log e
 memcache.connect()
 
 # helpers
