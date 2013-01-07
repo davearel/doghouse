@@ -9,7 +9,7 @@
       "port": "11211",
       "host": "localhost"
     },
-    "session_secret": "random_string_here"
+    "session_secret": "random_string_here",
     "cookie_secret": "random_string_here"
   },
   "testing" : {

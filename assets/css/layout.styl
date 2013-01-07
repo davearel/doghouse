@@ -2,12 +2,17 @@ body
   padding-top 63px
   padding-bottom 40px
 
-h1
+h1, h3
   font-family pt-sans
   font-weight normal
   font-size 32px
   padding 0
   margin 0
+
+h3
+  font-size 21px
+  line-height 26px
+  color grey_6
 
 [class^="icon-"], [class*=" icon-"]
   background-image url("../images/glyphicons-halflings.png")
@@ -32,8 +37,19 @@ h1
   box-shadow 0 0 0 1px rgba(0,0,0,0.1)
 
 .section-header
-  padding 30px 0
+  padding 30px 0 27px
   overflow hidden
+
+  .sorting
+    margin-top 4px
+  label
+    line-height 30px
+    font-weight bold
+    padding-right 10px
+  select
+    margin-bottom 0
+  .list-style
+    margin 2px 0 0 20px
 
 .navbar
   border-top 4px solid bblue
@@ -95,17 +111,6 @@ h1
         .btn
           box-shadow none
 
-.section-header
-  .sorting
-    margin-top 4px
-  label
-    line-height 30px
-    font-weight bold
-    padding-right 10px
-  select
-    margin-bottom 0
-  .list-style
-    margin 2px 0 0 20px
 
 footer
   background grey_e
