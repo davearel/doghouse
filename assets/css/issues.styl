@@ -42,40 +42,81 @@
           top 14px
           right 18px
         &:after
-          content ' '
-          background bgreen
-          display block
-          height 10px
-          width 10px
-          border-radius 10px
-          box-shadow inset 0 0 0 1px rgba(0,0,0,0.1)
-          position absolute
+          circle-labels(bgreen)
           top 18px
           left 18px
-
-      &.open
-        a
-          background white
 
       &:last-of-type
         a.dropdown-toggle
           border-radius 0 4px 4px 0
+        .dropdown-menu
+            right 1px
+            left auto
 
       &.orange
-        a.dropdown-toggle
+        a.dropdown-toggle, .selected
           &:after
-            background borange
+            background borange           
       &.blue
-        a.dropdown-toggle
+        a.dropdown-toggle, .selected
           &:after
             background bblue
       &.yellow
-        a.dropdown-toggle
+        a.dropdown-toggle, .selected
           &:after
             background byellow
 
+      &.open
+        a.dropdown-toggle
+          background white
+          border-bottom-right-radius 0
+
     .dropdown-menu
       min-width 407px
+      max-height 400px
+      overflow auto
+
+      &.narrow
+        min-width 203px
+
+      li
+        border-bottom 1px solid grey_e
+        font-size 13px
+        position relative
+
+        a
+          overflow hidden
+          padding 10px
+
+          img
+            width 22px
+            height 22px
+            float left
+            margin-right 7px
+
+          span
+            line-height 17px
+            color grey_6
+            padding-right 7px
+
+            &.name
+              font-weight bold
+              color bblack
+
+          &:hover
+            color bblack
+            background grey_fa
+
+        &.selected
+          &:after
+            circle-labels(bgreen)
+            top 50%
+            margin-top -5px
+            right 10px
+
+
+        &:last-of-type
+          border-bottom 0
 
 #issues
   padding-bottom 50px
@@ -86,11 +127,36 @@
     border 1px solid rgba(0,0,0,0.1)
     border-radius 4px
     margin-bottom 20px
+    position relative
 
     &.span6
       &:nth-child(odd)
         margin-left 0
         clear left
+
+    &.labeled
+      border-color bblack
+      &:after
+        content 'Priority'
+        background bblack
+        color white
+        padding 2px 8px
+        text-transform uppercase
+        letter-spacing 0.2em
+        font-size 9px
+        top 0
+        left 0
+        position absolute
+        border-bottom-right-radius 4px
+      &.priority
+        border-color bblue
+        &:after
+          background bblue
+      &.bug
+        border-color borange
+        &:after
+          content 'Bug'
+          background borange
 
     .name-img
       padding 15px
