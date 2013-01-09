@@ -23,12 +23,10 @@ html(lang='en')
           a.brand(href=root_path) Doghouse
           .nav-collapse.collapse
             ul.nav
-              li.active
+              li
                 a(href=issues_path) Issues
               li
                 a(href=events_path) Events
-              li
-                a(href='#contact') Contact
             form.navbar-form.pull-right
               if loggedIn()
                 a(href=logout_path).btn Sign out
