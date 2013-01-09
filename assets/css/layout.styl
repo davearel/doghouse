@@ -1,7 +1,7 @@
 body
   padding-top 63px
 
-h1, h3
+h1, h2, h3
   font-family pt-sans
   font-weight normal
   font-size 32px
@@ -16,16 +16,32 @@ h3
 [class^="icon-"], [class*=" icon-"]
   background-image url("../images/glyphicons-halflings.png")
 
+.icon-white, .nav-pills > .active > a > [class^="icon-"], .nav-pills > .active > a > [class*=" icon-"], .nav-list > .active > a > [class^="icon-"], .nav-list > .active > a > [class*=" icon-"], .navbar-inverse .nav > .active > a > [class^="icon-"], .navbar-inverse .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"], .dropdown-submenu:hover > a > [class^="icon-"], .dropdown-submenu:hover > a > [class*=" icon-"]
+  background-image url("../images/glyphicons-halflings-white.png")
+
 .container
   width 100%
 
 .content
   width 940px
   margin 0 auto
+  overflow visible
 
 .grey-bg
   background grey_fa
   border-top 1px solid grey_e
+
+.hero-unit
+  padding 40px
+  margin-bottom 0
+  background white
+
+  h1
+    font-size 32px
+
+  &.header-unit
+    h1
+      padding-top 6px
 
 .dropdown-menu
   padding 0
@@ -110,7 +126,6 @@ h3
         .btn
           box-shadow none
 
-
 footer
   background grey_e
   height 60px
@@ -118,3 +133,39 @@ footer
 
   p.copyright
     line-height 60px
+
+.table
+  border-bottom 1px solid grey_d
+
+  thead
+    font-size 21px
+    font-family pt-sans
+    color grey_6
+
+    th
+      padding 0 0 18px
+      font-weight normal !important
+      border-bottom 1px solid grey_d
+
+      &:first-child
+        padding-left 15px
+
+  tr
+    td
+      background white !important
+      padding 18px 0
+      border-top 0
+
+      &:first-child
+        padding-left 15px
+
+      &:last-child
+        padding-right 15px
+
+      &.actions
+        .btn
+          margin-left 5px
+
+    &:nth-child(even)
+      td
+        background grey_fa !important
