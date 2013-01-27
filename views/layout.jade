@@ -12,6 +12,9 @@ html(lang='en')
     link(href="/stylesheets/bootstrap-datepicker.css", media="screen", rel="stylesheet", type="text/css")
     != css('app')
     
+    script
+      var PATH_ROOT = "#{path_root}";
+
   body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
@@ -46,6 +49,9 @@ html(lang='en')
     script(src='/javascripts/bootstrap-datepicker.js')
     script(src='/javascripts/underscore.js')
     script(src='/javascripts/backbone.js')
+    script(src='/javascripts/backbone-view-model.js')
+    script(src='/javascripts/backbone.collectionview.js')
+    script(src='/javascripts/moment.js')
     != js('/js')
 
   | </html>

@@ -1,6 +1,7 @@
 express  = require 'express'
 stylus   = require 'stylus'
 assets   = require 'connect-assets'
+jade     = require 'connect-assets-jade'
 mongoose = require 'mongoose'
 memcache = require 'memcache'
 _        = require 'underscore'
@@ -15,6 +16,9 @@ app.port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 config = require "./config"
 app.configure 'production', 'development', 'testing', ->
   config.setEnvironment app.settings.env
+  app.use assets
+    jsCompilers:
+      jade: jade()
 
 # mongodb connection
 mongoose.connect 'mongodb://localhost/doghouse'
@@ -37,6 +41,8 @@ app.configure ->
   app.use (req, res, next) ->
     # make the config available throughout the application
     res.locals.config = config
+    res.locals.path_root = req._parsedUrl.path.split( '/' )[1]
+    console.log req
 
     # url helpers
     ## TODO: Create a file structure for these, we want to keep this file lighter

@@ -1,0 +1,34 @@
+.name-img
+  a.user-img(href='#{html_url}')
+    - if (assignee)
+      img.img-circle(src='#{assignee.avatar_url}')
+    - else
+      img.img-circle(src='https://i1.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-org-420.png?ssl=1')
+  .title
+    h3.issue-name
+      a(href='#{html_url}') #{title}
+    span.created
+      | created by 
+      a(href='#{html_url}') #{user.login}
+      |  #{created_at_formatted}
+    a.comments.pull-right(href='#{html_url}')
+      i.icon-comment
+      |  #{comments}
+
+.tags
+  span.label
+    a(href='#{html_url}') Issue ##{number}
+  
+  span.label.pull-right.yellow.outline
+    a(href='#{html_url}') Project Name
+
+  - if (milestone)
+    span.label.pull-right.orange.outline
+      a(href='#{html_url}') #{milestone.title}
+
+  span.label.pull-right.blue.outline
+    a(href='#{html_url}') #{repository.name}
+
+  - if (assignee)
+    span.label.pull-right.green.outline
+      a(href='#{html_url}') #{assignee.login}
