@@ -26,7 +26,6 @@ app.locals.routes = require("./helpers/routes")
 # helpers
 app.configure ->
   app.use (req, res, next) ->
-
     # view helper for the current logged-in state
     res.locals.loggedIn = () ->
       ! _.isEmpty req.session

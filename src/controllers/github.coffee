@@ -1,6 +1,7 @@
 request = require 'request'
 github = require '../lib/github_client'
 current_user = require '../lib/current_user'
+User = require '../models/user'
 settings = require '../lib/settings'
 
 github_client_id = settings.get("github").client_id
