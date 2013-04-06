@@ -1,0 +1,19 @@
+extends ../layout
+block page_content
+  form.form-horizontal(method='POST', action=typeof blog_post === 'undefined' ? routes.create_blog_post_path() : routes.update_blog_post_path(blog_post))
+    fieldset
+      legend 
+       = typeof blog_post === 'undefined' ? 'Suggest a' : 'Edit a Suggested'
+        &nbsp;Blog Post
+      div.control-group
+        label.control-label(for='inputName') Post Title
+        div.controls
+          input#inputEventName(type='text', name="name", value=typeof blog_post === 'undefined' ? null : blog_post.name)
+      div.control-group
+        label.control-label(for='blog_postNotes') Description
+        div.controls
+          textarea#inputNotes(name="description")= typeof blog_post === 'undefined' ? null : blog_post.description
+      div.form-actions
+        button.btn(type='submit').btn-primary 
+          = typeof blog_post === 'undefined' ? 'Create' : 'Update'
+        button.btn(type='button', onclick='window.location.href = "'+routes.blog_posts_path()+'"').btn Cancel
