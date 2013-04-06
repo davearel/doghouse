@@ -1,2 +1,1 @@
-define 'models/issues/repo', ->
-  class Repo extends Backbone.Model
+class App.Github.Repo extends Backbone.Model

@@ -1,5 +1,5 @@
-define 'collections/issues/users', ['models/issues/user'], (User) ->
+class App.Github.Users extends Backbone.Collection
 
-  class Users extends Backbone.Collection
-    model: User
-    url: 'github/users'
+  model: App.Github.User
+
+  url: 'github/users'

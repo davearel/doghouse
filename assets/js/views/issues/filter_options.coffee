@@ -1,31 +1,20 @@
-define 'views/issues/filter_options', ->
+class Option extends Backbone.View
 
-  class Option extends Backbone.View
+  tagName: 'li'
+  
+  events:
+    'click > div': 'select'
 
-    tagName: 'li'
-    
-    events:
-      'click': 'select'
+  select: (event) ->
+    App.github.filter.user = event.currentTarget.dataset.value
+    App.trigger('github:filter:change', event.currentTarget.dataset)
 
-    select: (event) ->
-      @trigger('select', this)
+  render: ->
+    @$el.html JadeTemplates['templates/issues/filter_option']( @model.toJSON() )
 
-    render: ->
-      @$el.html JadeTemplates['templates/issues/filter_option']( @model.toJSON() )
+class App.View.GithubFilterOptions extends Backbone.CollectionView
 
-  class Options extends Backbone.CollectionView
+  itemView: Option 
 
-    itemView: Option 
-
-    initialize: (o) ->
-      @type = o.type
-
-    viewEvents:
-      'select': 'onItemSelect'
-
-    onItemSelect: (view) ->
-      switch @type
-        when 'user'
-          console.log @type
-
-  return Options
+  initialize: (o) ->
+    @type = o.type

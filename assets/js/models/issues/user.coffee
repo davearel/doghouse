@@ -1,2 +1,1 @@
-define 'models/issues/user', ->
-  class User extends Backbone.Model
+class App.Github.User extends Backbone.Model

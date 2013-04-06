@@ -1,21 +1,15 @@
-#= require_tree js
+#= require js/app
 
-define 'collections', [
-  
-  'collections/issues/users'
-  'collections/issues/repos'
+#= require_tree js/models/
+#= require_tree js/collections/
+#= require_tree js/controllers/
 
-], (UsersCollection, ReposCollection) ->
-  collections = {}
-  collections.users = new UsersCollection()
-  collections.repos = new ReposCollection()
-  collections.users.fetch()
-  collections.repos.fetch()
-  return collections
-
+#= require_tree js/templates/
+#= require_tree js/view_models/
+#= require_tree js/views/
 
 # Decide what controller use based on URL root
 switch PATH_ROOT
   
   when 'issues'
-    controller = require 'controllers/issues'
+    new App.Controller.Issues()

@@ -1,3 +1,1 @@
-define 'view_models/issues/filter', ->
-
-  class Filter extends Backbone.Model
+class App.Github.Filter extends Backbone.Model

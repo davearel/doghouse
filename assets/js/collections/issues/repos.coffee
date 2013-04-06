@@ -1,5 +1,3 @@
-define 'collections/issues/repos', ['models/issues/repo'], (Repo) ->
-
-  class Repos extends Backbone.Collection
-    model: Repo
-    url: 'github/repos'
+class App.Github.Repos extends Backbone.Collection
+  model: App.Github.Repo
+  url: 'github/repos'

@@ -1,8 +1,7 @@
-define 'models/issues/issue', ->
-  class Issue extends Backbone.Model
+class App.Github.Issue extends Backbone.Model
 
-    initialize: ->
-      @formatCreatedAt()
+  initialize: ->
+    @computeAttributes()
 
-    formatCreatedAt: ->
-      @set 'created_at_formatted', moment( @get('created_at') ).from( moment() )
+  computeAttributes: ->
+    @set 'created_at_formatted', moment( @get('created_at') ).from( moment() )
