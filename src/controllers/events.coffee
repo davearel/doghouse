@@ -1,4 +1,5 @@
 Event = require '../models/event'
+current_user = require '../lib/current_user'
 
 exports.index = (req, res) ->
   Event.find {}, (err, events) ->
@@ -8,13 +9,17 @@ exports.new = (req, res) ->
   res.render 'events/form'
 
 exports.create = (req, res) ->
-  event = new Event req.body
-  event.save (err, event) ->
-    if not err
-      res.redirect '/events'
-    else
-      res.statusCode = 500
-      res.render 'events/form', event: event
+  current_user.do req, (user) ->
+    event = new Event req.body
+    event.save (err, event) ->
+      if not err
+        res.redirect '/events'
+      else
+        res.statusCode = 500
+        res.render 'events/form', event: event
+  , () ->
+    res.statusCode = 403
+    res.redirect '/'
 
 exports.edit = (req, res) ->
   Event.findById req.params.id, (err, event) ->

@@ -1,6 +1,6 @@
 request = require 'request'
 github = require '../lib/github_client'
-User = require '../models/user'
+current_user = require '../lib/current_user'
 settings = require '../lib/settings'
 
 github_client_id = settings.get("github").client_id
@@ -33,20 +33,23 @@ exports.callback = (req, res) ->
 # return a list of members on the current organization
 exports.users = (req, res) ->
   res.set 'Content-Type', 'application/json'
-  github.users res, req.session.user_id, (r) ->
-    res.send r
+  current_user.do req, (user) ->
+    github.users user, (r) ->
+      res.send r
 
 # return a list of repositories in the current organization
 exports.repos = (req, res) ->
   res.set 'Content-Type', 'application/json'
-  github.repos res, req.session.user_id, (r) ->
-    res.send r
+  current_user.do req, (user) ->
+    github.repos user, (r) ->
+      res.send r
 
 # return a list of repositories in the current organization
 exports.open_issues = (req, res) ->
   res.set 'Content-Type', 'application/json'
-  github.open_issues res, req.session.user_id, (r) ->
-    res.send r
+  current_user.do req, (user) ->
+    github.open_issues user, (r) ->
+      res.send r
 
 find_or_create_user_from_github_access_token = (access_token, callback) ->
   # get the user object from github
