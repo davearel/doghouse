@@ -8,21 +8,3 @@ class App.View.GithubForm extends Backbone.View
       type: 'user'
     person.render()
     person.renderAllItems()
-
-    # week = new Option
-    #   el: @$('.week .dropdown-menu')
-    #   collection: collections.users
-    # week.render()
-    # week.renderAllItems()
-    
-    # repo = new Option
-    #   el: @$('.repo .dropdown-menu')
-    #   collection: collections.users
-    # repo.render()
-    # repo.renderAllItems()
-    
-    # project = new Option
-    #   el: @$('.project .dropdown-menu')
-    #   collection: collections.users
-    # project.render()
-    # project.renderAllItems()
