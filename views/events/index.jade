@@ -3,7 +3,7 @@ block hero_unit
   .hero-unit.header-unit
     .content
       h1.pull-left Tech events have lots of beer and nerds!
-      a(href=new_event_path).btn.btn-primary.btn-large.pull-right Add an event
+      a(href=routes.new_event_path()).btn.btn-primary.btn-large.pull-right Add an event
       .clearfix
   .event-list.grey-bg
     .content
@@ -19,9 +19,9 @@ block hero_unit
               td= event.name
               td= event.when_at
               td.actions
-                a(href=delete_event_path(event)).btn.btn-danger.btn-mini.pull-right
+                a(href=routes.delete_event_path(event)).btn.btn-danger.btn-mini.pull-right
                   i.icon-remove.icon-white
-                a(href=edit_event_path(event)).btn.btn-mini.pull-right
+                a(href=routes.edit_event_path(event)).btn.btn-mini.pull-right
                   i.icon-pencil
                   &nbsp; Edit
 

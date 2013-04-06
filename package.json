@@ -28,7 +28,7 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "3.x" ,
-    "coffee-script": "1.4.0",
+    "coffee-script": "1.5.0",
     "jade": "0.26.0",
     "connect-assets": "2.3.3",
     "connect-assets-jade": "0.0.6",
@@ -40,8 +40,8 @@
     "mongoose": "3.5.3",
     "wrench": "1.4.4",
     "github": "0.1.8",
-    "underscore": "1.4.3",
-    "memcache": "0.3.0"
+    "underscore": "1.4.4",
+    "memcached": "0.2.2"
   },
   "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",
