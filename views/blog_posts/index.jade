@@ -3,7 +3,7 @@ block hero_unit
   .hero-unit.header-unit
     .content
       h1.pull-left Blogs take work, lets pick good topics!
-      a(href=new_blog_post_path).btn.btn-primary.btn-large.pull-right Suggest a post
+      a(href=routes.new_blog_post_path()).btn.btn-primary.btn-large.pull-right Suggest a post
       .clearfix
   .blog_post-list.grey-bg
     .content
@@ -23,9 +23,9 @@ block hero_unit
               td= blog_post.description
               td
               td.actions
-                a(href=delete_blog_post_path(blog_post)).btn.btn-danger.btn-mini.pull-right
+                a(href=routes.delete_blog_post_path(blog_post)).btn.btn-danger.btn-mini.pull-right
                   i.icon-remove.icon-white
-                a(href=edit_blog_post_path(blog_post)).btn.btn-mini.pull-right
+                a(href=routes.edit_blog_post_path(blog_post)).btn.btn-mini.pull-right
                   i.icon-pencil
                   &nbsp; Edit
 

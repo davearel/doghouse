@@ -1,6 +1,6 @@
 extends ../layout
 block page_content
-  form.form-horizontal(method='POST', action=typeof blog_post === 'undefined' ? create_blog_post_path : update_blog_post_path(blog_post))
+  form.form-horizontal(method='POST', action=typeof blog_post === 'undefined' ? routes.create_blog_post_path() : routes.update_blog_post_path(blog_post))
     fieldset
       legend 
        = typeof blog_post === 'undefined' ? 'Suggest a' : 'Edit a Suggested'
@@ -16,4 +16,4 @@ block page_content
       div.form-actions
         button.btn(type='submit').btn-primary 
           = typeof blog_post === 'undefined' ? 'Create' : 'Update'
-        button.btn(type='button', onclick='window.location.href = "'+blog_posts_path+'"').btn Cancel
+        button.btn(type='button', onclick='window.location.href = "'+routes.blog_posts_path()+'"').btn Cancel

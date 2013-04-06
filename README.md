@@ -8,10 +8,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Contributors
 ------------
-Craig Ulliott   - @craigulliott
-Jennifer Dudley - @jennadudley
-Kyle McConnell  - @kylefoundry
-Dave Arel       - @davearel
+* Craig Ulliott   - @craigulliott
+* Jennifer Dudley - @jennadudley
+* Kyle McConnell  - @kylefoundry
+* Dave Arel       - @davearel
 
 
 Node boilerplate:

@@ -20,20 +20,20 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href=root_path) Doghouse
+          a.brand(href=routes.root_path()) Doghouse
           .nav-collapse.collapse
             ul.nav
               li
-                a(href=issues_path) Issues
+                a(href=routes.issues_path()) Issues
               li
-                a(href=events_path) Events
+                a(href=routes.events_path()) Events
               li
-                a(href=blog_posts_path) Blog Posts
+                a(href=routes.blog_posts_path()) Blog Posts
             form.navbar-form.pull-right
               if loggedIn()
-                a(href=logout_path).btn Sign out
+                a(href=routes.logout_path()).btn Sign out
               else 
-                a(href=github_connect_url).btn Sign in with GitHub
+                a(href=routes.github_connect_url()).btn Sign in with GitHub
 
     .container
       block hero_unit
