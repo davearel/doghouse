@@ -1,23 +1,44 @@
 extends ../layout
+
 block page_content
-  form.form-horizontal(method='POST', action=typeof event === 'undefined' ? routes.create_event_path() : routes.update_event_path(event))
+  form.form-horizontal(method='POST', action= event ? routes.create_event_path() : routes.update_event_path(event))
     fieldset
       legend 
-       = typeof event === 'undefined' ? 'Add an' : 'Edit'
+       =  event ? 'Add an' : 'Edit'
         &nbsp;Event
-      div.control-group
+
+      - if (error && error.message)
+        .alert.alert-error= error.message
+
+      .control-group(class=(error && error.errors && error.errors.name) && 'error')
         label.control-label(for='inputName') Event Name
-        div.controls
-          input#inputEventName(type='text', name="name", value=typeof event === 'undefined' ? null : event.name)
-      div.control-group
+        .controls
+          input#inputName(type='text', name="name", value=event.name)
+          - if (error && error.errors && error.errors.name)
+            span.help-inline= error.errors.name.type
+
+      .control-group(class=(error && error.errors && error.errors.uri) && 'error')
+        label.control-label(for='inputName') URI
+        .controls
+          input#inputURI(type='text', name="uri", value=event.uri)
+          - if (error && error.errors && error.errors.uri)
+            span.help-inline= error.errors.uri.type
+
+      .control-group(class=(error && error.errors && error.errors.when_at) && 'error')
         label.control-label(for='inputWhenAt') When is it
-        div.controls
-          input#inputEventName(type='text', name="when_at", data-date-format="dd-mm-yyyy", value=typeof event === 'undefined' ? null : event.when_at).datepicker
-      div.control-group
-        label.control-label(for='eventNotes') Notes
-        div.controls
-          textarea#inputNotes(name="notes")= typeof event === 'undefined' ? null : event.notes
-      div.form-actions
+        .controls
+          input#inputWhenAt.datepicker(type='text', name="when_at", value=event.when_at_datepicker_format)
+          - if (error && error.errors && error.errors.when_at)
+            span.help-inline= error.errors.when_at.type
+
+      .control-group(class=(error && error.errors && error.errors.notes) && 'error')
+        label.control-label(for='inputNotes') Notes
+        .controls
+          textarea#inputNotes(name="notes")= event.notes
+          - if (error && error.errors && error.errors.notes)
+            span.help-inline= error.errors.notes.type
+      
+      .form-actions
         button.btn(type='submit').btn-primary 
-          = typeof event === 'undefined' ? 'Create' : 'Update'
-        button.btn(type='button', onclick='window.location.href = "'+routes.events_path()+'"').btn Cancel
+          =  event ? 'Create' : 'Update'
+        button.btn(type='button', onclick='window.location.href = "' + routes.events_path() + '"').btn Cancel
