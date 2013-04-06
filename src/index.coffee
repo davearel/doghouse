@@ -26,15 +26,6 @@ app.locals.routes = require("./helpers/routes")
 # helpers
 app.configure ->
   app.use (req, res, next) ->
-    
-    # the current user model (from the session)
-    res.locals.withCurrentUser = (success_callback, error_callback) ->
-      if req.session and req.session.user_id 
-        User.findById req.session.user_id, (err, user) ->
-          if user
-            success_callback(user) 
-            return
-      error_callback()
 
     # view helper for the current logged-in state
     res.locals.loggedIn = () ->
