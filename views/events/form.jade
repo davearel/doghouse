@@ -1,6 +1,6 @@
 extends ../layout
 block page_content
-  form.form-horizontal(method='Post', action=typeof event === 'undefined' ? create_event_path : update_event_path(event))
+  form.form-horizontal(method='POST', action=typeof event === 'undefined' ? create_event_path : update_event_path(event))
     fieldset
       legend 
        = typeof event === 'undefined' ? 'Add an' : 'Edit'

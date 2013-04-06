@@ -4,6 +4,7 @@ assets   = require 'connect-assets'
 mongoose = require 'mongoose'
 memcache = require 'memcache'
 _        = require 'underscore'
+User     = require './models/user'
 
 # Create app instance.
 app = express()
@@ -53,17 +54,30 @@ app.configure ->
       '/events/'+event.id+'/update'
     res.locals.delete_event_path = (event) ->
       '/events/'+event.id+'/delete'
+    # events
+    res.locals.blog_posts_path = '/blog_posts'
+    res.locals.new_blog_post_path = '/blog_posts/new'
+    res.locals.create_blog_post_path = '/blog_posts/create'
+    res.locals.edit_blog_post_path = (blog_post) ->
+      '/blog_posts/'+blog_post.id+'/edit'
+    res.locals.update_blog_post_path = (blog_post) ->
+      '/blog_posts/'+blog_post.id+'/update'
+    res.locals.delete_blog_post_path = (blog_post) ->
+      '/blog_posts/'+blog_post.id+'/delete'
     # 
     res.locals.root_path = '/'
-
-    # memcache and mongoose
-    res.locals.memcache = memcache
-    res.locals.mongoose = mongoose
 
     # template helpers
     ## TODO: Create a file structure for these, we want to keep this file lighter
     res.locals.loggedIn = () ->
       ! _.isEmpty req.session
+    res.locals.withCurrentUser = (success_callback, error_callback) ->
+      if req.session and req.session.user_id 
+        User.findById req.session.user_id, (err, user) ->
+          if user
+            success_callback(user) 
+            return
+      error_callback()
     next()
 
 # sessions in cookies

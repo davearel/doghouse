@@ -1,0 +1,34 @@
+extends ../layout
+block hero_unit
+  .hero-unit.header-unit
+    .content
+      h1.pull-left Blogs take work, lets pick good topics!
+      a(href=new_blog_post_path).btn.btn-primary.btn-large.pull-right Suggest a post
+      .clearfix
+  .blog_post-list.grey-bg
+    .content
+      table.table.table-striped
+        thead
+          tr
+            th Name
+            th Suggestor
+            th Description
+            th Votes
+            th
+        tbody
+          each blog_post in blog_posts
+            tr
+              td= blog_post.name
+              td= blog_post.created_by.name
+              td= blog_post.description
+              td
+              td.actions
+                a(href=delete_blog_post_path(blog_post)).btn.btn-danger.btn-mini.pull-right
+                  i.icon-remove.icon-white
+                a(href=edit_blog_post_path(blog_post)).btn.btn-mini.pull-right
+                  i.icon-pencil
+                  &nbsp; Edit
+
+
+
+
