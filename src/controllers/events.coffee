@@ -6,33 +6,41 @@ exports.index = (req, res) ->
     res.render 'events/index',  events: events
 
 exports.new = (req, res) ->
-  res.render 'events/form'
+  event = new Event
+  res.render 'events/form', event: event, error: null
 
 exports.create = (req, res) ->
+
+  # with the current user
   current_user.do req, (user) ->
+
+    # create a new event model
     event = new Event req.body
     event.created_by = user
-    event.save (err, event) ->
-      if not err
+
+    event.save (error) ->
+      if not error
         res.redirect '/events'
       else
         res.statusCode = 500
-        res.render 'events/form', event: event
+        res.render 'events/form', event: event, error: error
+  
+  # user not signed in
   , () ->
     res.statusCode = 403
     res.redirect '/'
 
 exports.edit = (req, res) ->
   Event.findById req.params.id, (err, event) ->
-    res.render 'events/form', event: event
+    res.render 'events/form', event: event, error: null
 
 exports.update = (req, res) ->
-  Event.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, event) ->
-    if not err
+  Event.findByIdAndUpdate req.params.id, {"$set":req.body}, (error) ->
+    if not error
       res.redirect '/events'
     else
       res.statusCode = 500
-      res.render 'events/form', event: event
+      res.render 'events/form', event: event, error: error
 
 exports.delete = (req, res) ->
   Event.findByIdAndRemove req.params.id, (err) ->

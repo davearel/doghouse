@@ -41,7 +41,8 @@
     "wrench": "1.4.4",
     "github": "0.1.8",
     "underscore": "1.4.4",
-    "memcached": "0.2.2"
+    "memcached": "0.2.2",
+    "dateformat": "1.0.6-1.2.3"
   },
   "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",
