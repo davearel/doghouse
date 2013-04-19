@@ -17,11 +17,12 @@ block hero_unit
         tbody
           each event in events
             tr
-              td= event.name
-              td= event.when_at
+              td
+                a(href=event.uri, target='_blank')= event.name
+              td= event.when_at.toDateString()
               td= event.created_by.name
               td.actions
-                a(href=routes.delete_event_path(event)).btn.btn-danger.btn-mini.pull-right
+                a.confirm-delete(href=routes.delete_event_path(event)).btn.btn-danger.btn-mini.pull-right
                   i.icon-remove.icon-white
                 a(href=routes.edit_event_path(event)).btn.btn-mini.pull-right
                   i.icon-pencil

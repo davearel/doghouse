@@ -49,7 +49,28 @@ exports.repos = (req, res) ->
 exports.open_issues = (req, res) ->
   res.set 'Content-Type', 'application/json'
   current_user.do req, (user) ->
-    github.open_issues user, (r) ->
+    github.organization_issues user, (r) ->
+      res.send r
+
+# return a list of repositories in the current organization
+exports.milestones = (req, res) ->
+  res.set 'Content-Type', 'application/json'
+  current_user.do req, (user) ->
+    github.organization_milestones user, (r) ->
+      res.send r
+
+# return a list of repositories in the current organization
+exports.labels = (req, res) ->
+  res.set 'Content-Type', 'application/json'
+  current_user.do req, (user) ->
+    github.organization_labels user, (r) ->
+      res.send r
+
+# return a list of repositories in the current organization
+exports.product_labels = (req, res) ->
+  res.set 'Content-Type', 'application/json'
+  current_user.do req, (user) ->
+    github.organization_product_labels user, (r) ->
       res.send r
 
 find_or_create_user_from_github_access_token = (access_token, callback) ->
