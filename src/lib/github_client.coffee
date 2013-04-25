@@ -100,7 +100,6 @@ all_repo_names = (user, callback) ->
   get_from_github_with_memcached '/orgs/'+organization+'/repos?access_token='+user.access_token, (repos) ->
     for repo, i in repos
       repo_names.push(repo['name'])
-    console.log callback
     callback repo_names
 
 
@@ -111,13 +110,13 @@ get_from_github_with_memcached = (path_with_params, callback) ->
   
   # first try memcached
   memcache.get cache_key, (result) ->
-    result = false
+
     if result
       # parse the result which is already in memcache
       response = JSON.parse(result)
       callback response
-  
-    else 
+
+    else
 
       # get it from github and cache the response
       request {

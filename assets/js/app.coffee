@@ -8,8 +8,6 @@ window.App =
 
 # extend our app object to handle backbone events
 _.extend( App, Backbone.Events )
-App.on 'all', (e) -> console.log e
-
 
 # Avoid `console` errors in browsers that lack a console.
 (->
