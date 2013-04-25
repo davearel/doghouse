@@ -5,22 +5,22 @@ class Issue extends Backbone.View
     _.each @model.get('labels'), (label) =>
       if label.name.toLowerCase() is 'bug' then @$el.addClass('labeled bug')
       if label.name.toLowerCase() is 'priority' then @$el.addClass('labeled priority')
-    
+
     @$el.html JadeTemplates['templates/issues/issues']( @model.toJSON() )
 
 
 class App.View.GithubIssues extends Backbone.View
-  itemView: Issue
 
   initialize: ->
-    App.on 'github:filter:change', @render
+    App.github.search_filters.on 'add:filter remove:filter', @render
 
   renderItem: (model) =>
-    # return unless model matches filter properties
-    if App.github.filter.user?
-      return unless model.attributes.assignee?.login is App.github.filter.user
 
-    item = new @itemView({ model: model })
+    match = model.get('filterMatch')
+    # return unless model matches filter properties
+    return if match is false
+
+    item = new Issue({ model: model })
     item.render()
     @$placeholder.append( item.el )
 

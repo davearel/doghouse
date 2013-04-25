@@ -8,8 +8,8 @@
 #= require_tree js/view_models/
 #= require_tree js/views/
 
-# Decide what controller use based on URL root
-switch PATH_ROOT
+# Decide what controller use based on URL path
+switch document.location.pathname
   
-  when 'issues'
+  when '/issues'
     new App.Controller.Issues()
