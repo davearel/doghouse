@@ -1,0 +1,6 @@
+each user in users
+  .user
+    .avatar
+      a(href='http://github.com/#{user.login}')
+        img(src='#{user.avatar_url}')
+    .login @#{user.login}

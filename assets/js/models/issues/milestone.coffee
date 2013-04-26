@@ -1,0 +1,1 @@
+class App.Github.Milestone extends Backbone.Model

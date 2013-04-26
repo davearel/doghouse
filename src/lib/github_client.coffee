@@ -15,7 +15,7 @@ exports.repos = (user, callback) ->
   get_from_github_with_memcached '/orgs/'+organization+'/repos?access_token='+user.access_token, callback
 
 exports.organization_issues = (user, callback) -> 
-  all_issues = {}
+  all_issues = []
   repos_processed_count = 0
   all_repo_names user, (repo_names) ->
 
@@ -29,11 +29,15 @@ exports.organization_issues = (user, callback) ->
         _repo_name = repo_name
         get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/issues?access_token='+user.access_token, (issues) ->
 
-          # build an array for first time we get a response for this repo
-          all_issues[_repo_name] = [] unless all_issues[_repo_name]
+          # only add if its a proper array with length
+          if issues.length
 
-          for issue in issues
-            all_issues[_repo_name].push(issue) 
+            # add repository name to each issue
+            for issue in issues
+              issue.repository = _repo_name
+
+            # add issues to the collection
+            all_issues = all_issues.concat issues
 
           repos_processed_count++
 
@@ -42,7 +46,7 @@ exports.organization_issues = (user, callback) ->
       )()
 
 exports.organization_milestones = (user, callback) -> 
-  all_milestones = {}
+  all_milestones = []
   repos_processed_count = 0
   all_repo_names user, (repo_names) ->
 
@@ -57,10 +61,7 @@ exports.organization_milestones = (user, callback) ->
         get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/milestones?access_token='+user.access_token, (milestones) ->
 
           for milestone in milestones
-            # build an array for first time we get a response for this repo
-            all_milestones[milestone['title']] = {repos:[]} unless all_milestones[milestone['title']]
-            # store this milestone, and build an array of repos which use it
-            all_milestones[milestone['title']]['repos'].push(_repo_name) 
+            all_milestones.push { title: milestone['title'] }
 
           repos_processed_count++
 
@@ -69,7 +70,7 @@ exports.organization_milestones = (user, callback) ->
       )()
 
 exports.organization_product_labels = (user, callback) -> 
-  all_product_labels = {}
+  all_product_labels = []
   repos_processed_count = 0
   all_repo_names user, (repo_names) ->
 
@@ -84,11 +85,9 @@ exports.organization_product_labels = (user, callback) ->
         get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/labels?access_token='+user.access_token, (labels) ->
 
           for label in labels
-            if label['name'].substring(0, 2) == "p:"
-              # build an array for first time we get a response for this repo
-              all_product_labels[label['name']] = {repos:[]} unless all_product_labels[label['name']]
-              # store this label, and build an array of repos which use it
-              all_product_labels[label['name']]['repos'].push(_repo_name) 
+            label_name = label['name'].toLowerCase()
+            if label_name.substring(0, 2) is "p:"
+              all_product_labels.push { name: label_name.replace('p:', '') }
 
           repos_processed_count++
 
@@ -106,7 +105,6 @@ all_repo_names = (user, callback) ->
 
 # get data from github, with a 10 minute cache
 get_from_github_with_memcached = (path_with_params, callback) ->
-
   # name space it - because we have shared cache servers
   cache_key = 'doghouse|github|'+path_with_params
   
@@ -117,11 +115,18 @@ get_from_github_with_memcached = (path_with_params, callback) ->
       # parse the result which is already in memcache
       response = JSON.parse(result)
       callback response
-  
-    else 
+
+    else
 
       # get it from github and cache the response
-      request.get github_api_base_uri + path_with_params, (e, r, b) ->
+      request {
+
+        method: 'GET'
+        headers: { 'User-Agent': 'Doghouse' }
+        url: github_api_base_uri + path_with_params
+
+      }, (e, r, b) ->
+
         # store the response in memcached for next time (up to 10 minutes)
         memcache.set cache_key, r.body, 600, (result) ->
 

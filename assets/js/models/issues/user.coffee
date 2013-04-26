@@ -1,0 +1,1 @@
+class App.Github.User extends Backbone.Model

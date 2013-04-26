@@ -1,0 +1,1 @@
+class App.Github.Filter extends Backbone.Model

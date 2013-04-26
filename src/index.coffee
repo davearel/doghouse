@@ -1,6 +1,7 @@
 express  = require 'express'
 stylus   = require 'stylus'
 assets   = require 'connect-assets'
+jade     = require 'connect-assets-jade'
 mongoose = require 'mongoose'
 _        = require 'underscore'
 settings = require './lib/settings'
@@ -16,6 +17,9 @@ app.port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 config = require "./config"
 app.configure 'production', 'development', 'testing', ->
   config.setEnvironment app.settings.env
+  app.use assets
+    jsCompilers:
+      jade: jade()
 
 # mongodb connection
 mongoose.connect 'mongodb://localhost/doghouse'

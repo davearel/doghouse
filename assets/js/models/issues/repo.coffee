@@ -1,0 +1,1 @@
+class App.Github.Repo extends Backbone.Model

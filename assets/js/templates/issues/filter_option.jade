@@ -1,0 +1,24 @@
+- if (type === 'user')
+
+  div(data-key='users', data-value='#{login}')
+    img.img-circle(src='#{avatar_url}')
+    //- span.name #{name}
+    span.username #{login}
+
+- if (type === 'milestone')
+
+  div(data-key='milestones', data-value='#{title}')
+    i.icon-calendar
+    &nbsp; #{title}
+
+- if (type === 'repo')
+
+  div(data-key='repos', data-value='#{name}')
+    i.icon-briefcase
+    &nbsp; #{name}
+
+- if (type === 'project')
+
+  div(data-key='projects', data-value='#{name}')
+    i.icon-th
+    &nbsp; #{name}
