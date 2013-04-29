@@ -2,10 +2,9 @@ request = require 'request'
 github = require '../lib/github_client'
 current_user = require '../lib/current_user'
 User = require '../models/user'
-settings = require '../lib/settings'
 
-github_client_id = settings.get("github").client_id
-github_secret = settings.get("github").secret
+github_client_id = process.env['github_client_id']
+github_secret = process.env['github_secret']
 
 # 1) after oauth connection with github we land here, 
 # 2) convert the code into an access_token
