@@ -66,9 +66,6 @@ task 'docs', 'Generate annotated source code with Docco', ->
     log err.message, red
     log 'Docco is not installed - try npm install docco -g', red
 
-task 'production', 'start production env', ->
-  build()
-  spawn 'node', ['server']
 
 task 'build', ->
   build -> log ":)", green
