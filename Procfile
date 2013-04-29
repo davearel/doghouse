@@ -1,1 +1,1 @@
-web: node server.js
+web: cake production

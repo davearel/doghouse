@@ -4,7 +4,6 @@ assets   = require 'connect-assets'
 jade     = require 'connect-assets-jade'
 mongoose = require 'mongoose'
 _        = require 'underscore'
-settings = require './lib/settings'
 User     = require './models/user'
 
 # Create app instance.
@@ -16,7 +15,7 @@ app.port = process.env.PORT or process.env.VMC_APP_PORT or 3000
 # Config module exports has `setEnvironment` function that sets app settings depending on environment.
 config = require "./config"
 app.configure 'production', 'development', 'testing', ->
-  config.setEnvironment app.settings.env
+  config.setEnvironment process.env.NODE_ENV
   app.use assets
     jsCompilers:
       jade: jade()
@@ -36,9 +35,9 @@ app.configure ->
     next()
 
 # sessions in cookies
-app.use(express.cookieParser(settings.get("cookie_secret")))
+app.use(express.cookieParser(process.env['cookie_secret']))
 app.use(express.cookieSession(
-  secret : settings.get("session_secret"),
+  secret : process.env['session_secret'],
   maxAge : new Date(Date.now() + 3600000)
 ))
 
@@ -50,7 +49,7 @@ app.use express.static(process.cwd() + '/public')
 # Set View Engine.
 app.set 'view engine', 'jade'
 # pretty print the html output in development
-app.locals.pretty = true if app.settings.env == 'development'
+app.locals.pretty = true if process.env.NODE_ENV is 'development'
 
 # [Body parser middleware](http://www.senchalabs.org/connect/middleware-bodyParser.html) parses JSON or XML bodies into `req.body` object
 app.use express.bodyParser()

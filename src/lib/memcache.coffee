@@ -1,5 +1,4 @@
 Memcached = require 'memcached'
-settings = require './settings'
 
 memcached = null
 
@@ -15,6 +14,6 @@ exports.set = (cache_key, value, timeout, callback) ->
 
 prepare_connection = () ->
   # memcached client (uses a connection pool)
-  memcached = new Memcached(settings.get("memcached").servers)
+  memcached = new Memcached( process.env['memcached_servers'] )
 
 prepare_connection()
