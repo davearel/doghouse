@@ -43,7 +43,7 @@
     "underscore": "1.4.4",
     "memcached": "0.2.2",
     "dateformat": "1.0.6-1.2.3",
-    "docco-husky": "0.0.4",
+    "docco-husky": "0.3.3",
     "puts": "0.0.2",
     "node-inspector": "0.2.0beta4",
     "ejs": "0.8.3"
