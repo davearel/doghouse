@@ -28,6 +28,7 @@ exports.callback = (req, res) ->
 
       # login this users by putting their user id in the session
       req.session.user_id = user.id
+      req.session.logged_in = true
       # redirect back to the homepage
       res.redirect '/'
 

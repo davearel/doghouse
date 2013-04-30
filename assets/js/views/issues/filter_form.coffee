@@ -24,7 +24,7 @@ class App.View.GithubForm extends Backbone.View
       type: 'repo'
     repo.render()
 
-    # render the projects filter options    
+    # render the projects filter options
     project = new App.View.GithubFilterOptions
       el: @$('.project .dropdown-menu')
       collection: App.github.projects
