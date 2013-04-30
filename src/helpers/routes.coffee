@@ -1,6 +1,6 @@
 settings = require '../lib/settings'
 
-github_client_id = settings.get("github").client_id
+github_client_id = settings.get 'github_client_id'
 
 exports.root_path = () ->
   '/'

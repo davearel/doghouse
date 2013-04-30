@@ -14,3 +14,4 @@ logs
 results
 settings.json
 npm-debug.log
+.DS_Store

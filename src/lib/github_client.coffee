@@ -5,7 +5,8 @@ memcache = require './memcache'
 request = require 'request'
 settings = require './settings'
 
-organization = settings.get("github").organization
+organization = settings.get 'github_organization'
+
 github_api_base_uri = 'https://api.github.com'
 
 exports.users = (user, callback) -> 

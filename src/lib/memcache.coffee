@@ -15,6 +15,6 @@ exports.set = (cache_key, value, timeout, callback) ->
 
 prepare_connection = () ->
   # memcached client (uses a connection pool)
-  memcached = new Memcached(settings.get("memcached").servers)
+  memcached = new Memcached( settings.get 'memcached_servers' )
 
 prepare_connection()
