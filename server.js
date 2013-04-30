@@ -1,9 +1,4 @@
-var app, port, settings;
-
-if (process.env.NODE_ENV === 'development') {
-  settings = require('./.app/lib/settings')
-  settings.get()
-}
+var app, port;
 
 app = require('./.app');
 

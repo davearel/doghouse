@@ -5,6 +5,10 @@ jade     = require 'connect-assets-jade'
 mongoose = require 'mongoose'
 _        = require 'underscore'
 User     = require './models/user'
+settings = require './lib/settings'
+
+# extend the settings
+settings.extend()
 
 # Create app instance.
 app = express()
@@ -39,9 +43,9 @@ app.configure ->
     next()
 
 # sessions in cookies
-app.use(express.cookieParser(process.env['cookie_secret']))
+app.use(express.cookieParser( settings.get 'cookie_secret' ))
 app.use(express.cookieSession(
-  secret : process.env['session_secret'],
+  secret : settings.get('session_secret')
   maxAge : new Date(Date.now() + 3600000)
 ))
 

@@ -3,8 +3,10 @@
 
 memcache = require './memcache'
 request = require 'request'
+settings = require './settings'
 
-organization = process.env['github_organization']
+organization = settings.get 'github_organization'
+
 github_api_base_uri = 'https://api.github.com'
 
 exports.users = (user, callback) -> 

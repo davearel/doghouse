@@ -1,4 +1,6 @@
-github_client_id = process.env['github_client_id']
+settings = require '../lib/settings'
+
+github_client_id = settings.get 'github_client_id'
 
 exports.root_path = () ->
   '/'
