@@ -20,8 +20,12 @@ app.configure 'production', 'development', 'testing', ->
     jsCompilers:
       jade: jade()
 
+# Here we find an appropriate database to connect to, defaulting to
+# localhost if we don't find one.  
+mongo_url = process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or 'mongodb://localhost/doghouse'
+
 # mongodb connection
-mongoose.connect 'mongodb://localhost/doghouse'
+mongoose.connect mongo_url
 
 # make routes and other helpers available in our views
 app.locals.routes = require("./helpers/routes")
