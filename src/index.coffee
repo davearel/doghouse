@@ -53,7 +53,7 @@ app.configure 'production', 'development', 'testing', ->
 
 # Here we find an appropriate database to connect to, defaulting to
 # localhost if we don't find one.  
-mongo_url = process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or 'mongodb://localhost/doghouse'
+mongo_url = process.env.MONGOHQ_URL or 'mongodb://localhost/doghouse'
 
 # mongodb connection
 mongoose.connect mongo_url

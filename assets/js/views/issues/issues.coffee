@@ -32,3 +32,5 @@ class App.View.GithubIssues extends Backbone.View
     @items = []  # stores our collection of reward views
     @collection.each( @renderItem )
     @$el.html @$placeholder.children()
+
+    $('#issue-count').text( @items.length + if @items.length isnt 1 then ' issues' else ' issue' )
