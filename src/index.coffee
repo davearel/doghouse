@@ -29,12 +29,6 @@ app.use(assets({
   jsCompilers: jade: jadeAssets()
 }))
 
-# View helper for the current logged-in state
-app.use (req, res, next) ->
-  res.locals.loggedIn = () ->
-    req.session.logged_in
-  next()
-
 # Sessions and cookies
 app.use(express.cookieParser( settings.get 'cookie_secret' ))
   
