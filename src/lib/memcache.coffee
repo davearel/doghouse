@@ -1,5 +1,5 @@
-Memcached = require 'memcached'
-settings = require './settings'
+memjs     = require 'memjs'
+settings  = require './settings'
 
 memcached = null
 
@@ -8,13 +8,12 @@ exports.get = (cache_key, callback) ->
     console.log error if error
     callback result
 
-exports.set = (cache_key, value, timeout, callback) ->
-  memcached.set cache_key, value, timeout, (error, result) ->
+exports.set = (cache_key, value, callback) ->
+  memcached.set cache_key, value, (error, result) ->
     console.log error if error
     callback result
 
 prepare_connection = () ->
-  # memcached client (uses a connection pool)
-  memcached = new Memcached( settings.get 'memcached_servers' )
+  memcached = memjs.Client.create()
 
 prepare_connection()

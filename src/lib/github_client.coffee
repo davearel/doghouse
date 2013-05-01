@@ -129,7 +129,7 @@ get_from_github_with_memcached = (path_with_params, callback) ->
       }, (e, r, b) ->
 
         # store the response in memcached for next time (up to 10 minutes)
-        memcache.set cache_key, r.body, 600, (result) ->
+        memcache.set cache_key, r.body, (result) ->
 
           response = JSON.parse(r.body)
           # send the result back via the callback
