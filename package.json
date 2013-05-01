@@ -2,23 +2,27 @@
   "name": "doghouse",
   "description": "Project management and place for Belly Devs to rally around",
   "author": "Belly Inc.",
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Craig Ulliott",
       "twitter": "@craigulliott"
-    }, 
+    },
     {
       "name": "Jennifer Dudley",
       "twitter": "@jennadudley"
-    }, 
+    },
     {
       "name": "Kyle McConnell ",
       "twitter": "@kylefoundry"
-    }, 
+    },
     {
       "name": "Dave Arel",
       "twitter": "@davearel"
-    } 
+    },
+    {
+      "name": "AJ Self",
+      "twitter": "@ajself"
+    }
   ],
   "repository": {
     "type": "git",

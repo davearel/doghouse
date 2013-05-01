@@ -39,7 +39,7 @@ app.configure ->
   app.use (req, res, next) ->
     # view helper for the current logged-in state
     res.locals.loggedIn = () ->
-      ! _.isEmpty req.session
+      req.session.logged_in
     next()
 
 # sessions in cookies
