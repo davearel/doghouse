@@ -24,25 +24,28 @@
       "twitter": "@ajself"
     }
   ],
+
   "repository": {
     "type": "git",
     "url": "https://github.com/bellycard/doghouse.git"
   },
+
   "license": "MIT",
   "version": "0.0.1",
+
   "dependencies": {
     "express": "3.2.1" ,
-    "coffee-script": "1.5.0",
-    "jade": "0.30.0",
-    "request": "2.20.0",
-    "connect-assets": "2.3.3",
-    "connect-assets-jade": "0.1.0",
-    "stylus": "0.27.x",
-    "nib": "0.9.0",
+    "request": "2.21.0",
+    "coffee-script": "1.6.2",
+    "jade": "0.27.0",
+    "connect-assets": "2.4.2",
+    "connect-assets-jade": "0.0.6",
+    "stylus": "0.32.1",
+    "nib": "0.9.1",
     "markdown": "0.4.0",
-    "passport": "0.1.15",
+    "passport": "0.1.16",
     "which": "1.0.5",
-    "mongoose": "3.5.3",
+    "mongoose": "3.6.8",
     "wrench": "1.4.4",
     "github": "0.1.8",
     "underscore": "1.4.4",
@@ -52,25 +55,23 @@
     "puts": "0.0.2",
     "ejs": "0.8.3"
   },
+
   "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",
     "start": "node server.js",
     "test": "mocha --require should --compilers coffee:coffee-script --colors"
   },
+
   "devDependencies": {
-    "coffee-script": "*",
     "mocha": "*",
     "should": "*",
     "supertest": "*",
-    "request": "*",
     "supervisor": "*",
-    "docco-husky": "*",
     "puts": "*",
-    "node-inspector": "*",
-    "ejs": "*"
+    "node-inspector": "*"
   },
+
   "engines": {
-    "node": "~0.8.x",
-    "npm": "1.1.x"
+    "node": "0.8.x"
   }
 }
