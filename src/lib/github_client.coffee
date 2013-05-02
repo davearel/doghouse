@@ -4,6 +4,7 @@
 memcache = require './memcache'
 request = require 'request'
 settings = require './settings'
+fs = require 'fs'
 
 organization = settings.get 'github_organization'
 
@@ -61,8 +62,11 @@ exports.organization_milestones = (user, callback) ->
         _repo_name = repo_name
         get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/milestones?access_token='+user.access_token, (milestones) ->
 
-          for milestone in milestones
-            all_milestones.push { title: milestone['title'] }
+          # only add if its a proper array with length
+          if milestones.length
+
+            for milestone in milestones
+              all_milestones.push { title: milestone['title'] }
 
           repos_processed_count++
 
@@ -85,10 +89,13 @@ exports.organization_product_labels = (user, callback) ->
         _repo_name = repo_name
         get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/labels?access_token='+user.access_token, (labels) ->
 
-          for label in labels
-            label_name = label['name'].toLowerCase()
-            if label_name.substring(0, 2) is "p:"
-              all_product_labels.push { name: label_name.replace('p:', '') }
+          # only add if its a proper array with length
+          if labels.length
+
+            for label in labels
+              label_name = label['name']?.toLowerCase()
+              if label_name.substring(0, 2) is "p:"
+                all_product_labels.push { name: label_name.replace('p:', '') }
 
           repos_processed_count++
 
@@ -99,22 +106,34 @@ exports.organization_product_labels = (user, callback) ->
 all_repo_names = (user, callback) ->
   repo_names = []
   get_from_github_with_memcached '/orgs/'+organization+'/repos?access_token='+user.access_token, (repos) ->
-    for repo, i in repos
-      repo_names.push(repo['name'])
+
+    # only add if its a proper array with length
+    if repos?.length
+
+      for repo, i in repos
+
+        # ensure only repos with a name get added
+        if repo.name then repo_names.push repo.name
+
     callback repo_names
 
 
 # get data from github, with a 10 minute cache
 get_from_github_with_memcached = (path_with_params, callback) ->
-  # name space it - because we have shared cache servers
-  cache_key = 'doghouse|github|'+path_with_params
+
+  # name space it - because we have shared cache servers  
+  cache_key = "doghouse|github|#{path_with_params}"
   
   # first try memcached
   memcache.get cache_key, (result) ->
 
-    if result
+    if result?
+
       # parse the result which is already in memcache
-      response = JSON.parse(result)
+      response = []
+      try
+        response = JSON.parse result
+
       callback response
 
     else
@@ -123,14 +142,21 @@ get_from_github_with_memcached = (path_with_params, callback) ->
       request {
 
         method: 'GET'
-        headers: { 'User-Agent': 'Doghouse' }
+        headers:
+          'User-Agent': 'Doghouse'
+          'content-type': 'application/json'
         url: github_api_base_uri + path_with_params
 
       }, (e, r, b) ->
 
-        # store the response in memcached for next time (up to 10 minutes)
-        memcache.set cache_key, r.body, (result) ->
+        result = []
+        if r.statusCode is 200
+          try
+            result = JSON.parse b
 
-          response = JSON.parse(r.body)
-          # send the result back via the callback
-          callback response
+        # send the result back via the callback
+        callback result
+
+        # store the response in memcached for next time (up to 10 minutes)
+        cache = JSON.stringify result
+        memcache.set cache_key, cache, 600
