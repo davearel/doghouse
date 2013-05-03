@@ -49,11 +49,11 @@
     "wrench": "1.4.4",
     "github": "0.1.8",
     "underscore": "1.4.4",
-    "memcached": "0.2.2",
     "dateformat": "1.0.6-1.2.3",
     "docco-husky": "0.3.3",
     "puts": "0.0.2",
-    "ejs": "0.8.3"
+    "ejs": "0.8.3",
+    "memjs": "0.5.2"
   },
 
   "scripts": {

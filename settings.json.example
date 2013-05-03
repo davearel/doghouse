@@ -1,13 +1,13 @@
 {
-  "github": {
-    "client_id": "1a2b3c4d5c",
-    "secret": "q1w2e3r4t5y6u7i8o9",
-    "organization": "bellycard"
-  },
-  "memcached": {
-    "port": "11211",
-    "host": "localhost"
-  },
+
+  "github_client_id": "1a2b3c4d5c",
+
+  "github_secret": "q1w2e3r4t5y6u7i8o9",
+
+  "github_organization": "bellycard",
+
   "session_secret": "a_random_string_here",
+
   "cookie_secret": "another_random_string_here"
+
 }
