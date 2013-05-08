@@ -25,7 +25,7 @@ exports.organization_issues = (user, callback) ->
 
       # get all the issues in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
-      # all_issues hash with the issues from each repo, and fire a callback only once 
+      # all_issues array with the issues from each repo, and fire a callback only once 
       # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
@@ -48,7 +48,9 @@ exports.organization_issues = (user, callback) ->
       )()
 
 exports.organization_milestones = (user, callback) -> 
-  all_milestones = []
+  unique_milestones = []
+  # dictionary to ensure unique milestones
+  milestones_dictionary = {}
   repos_processed_count = 0
   all_repo_names user, (repo_names) ->
 
@@ -56,7 +58,7 @@ exports.organization_milestones = (user, callback) ->
 
       # get all the milestones in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
-      # all_milestones hash with the milestones from each repo, and fire a callback only once 
+      # unique_milestones array with the milestones from each repo, and fire a callback only once 
       # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
@@ -66,12 +68,17 @@ exports.organization_milestones = (user, callback) ->
           if milestones.length
 
             for milestone in milestones
-              all_milestones.push { title: milestone['title'] }
+              title = milestone['title']
+
+              # check to see if we've already added this milestone
+              unless milestones_dictionary[title]
+                milestones_dictionary[title] = true
+                unique_milestones.push { title: title }
 
           repos_processed_count++
 
           # if we have processed all the issues, then trigger the callback 
-          callback(all_milestones) if repo_names.length == repos_processed_count
+          callback(unique_milestones) if repo_names.length == repos_processed_count
       )()
 
 exports.organization_product_labels = (user, callback) -> 
@@ -83,7 +90,7 @@ exports.organization_product_labels = (user, callback) ->
 
       # get all the labels in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
-      # all_product_labels hash with the labels from each repo, and fire a callback only once 
+      # all_product_labels array with the labels from each repo, and fire a callback only once 
       # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
