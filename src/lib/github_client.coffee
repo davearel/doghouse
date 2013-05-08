@@ -1,7 +1,7 @@
-#### github client library which leans on memcached
+#### github client library which leans on redis
 #### Craig Ulliott 2013
 
-memcache = require './memcache'
+redis = require './redis'
 request = require 'request'
 settings = require './settings'
 fs = require 'fs'
@@ -11,10 +11,10 @@ organization = settings.get 'github_organization'
 github_api_base_uri = 'https://api.github.com'
 
 exports.users = (user, callback) -> 
-  get_from_github_with_memcached '/orgs/'+organization+'/members?access_token='+user.access_token, callback
+  get_from_github_with_redis '/orgs/'+organization+'/members?access_token='+user.access_token, callback
 
 exports.repos = (user, callback) -> 
-  get_from_github_with_memcached '/orgs/'+organization+'/repos?access_token='+user.access_token, callback
+  get_from_github_with_redis '/orgs/'+organization+'/repos?access_token='+user.access_token, callback
 
 exports.organization_issues = (user, callback) -> 
   all_issues = []
@@ -26,10 +26,10 @@ exports.organization_issues = (user, callback) ->
       # get all the issues in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
       # all_issues hash with the issues from each repo, and fire a callback only once 
-      # all asynchronous calls to github and memcache have completed
+      # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
-        get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/issues?access_token='+user.access_token, (issues) ->
+        get_from_github_with_redis '/repos/'+organization+'/'+_repo_name+'/issues?access_token='+user.access_token, (issues) ->
 
           # only add if its a proper array with length
           if issues.length
@@ -57,10 +57,10 @@ exports.organization_milestones = (user, callback) ->
       # get all the milestones in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
       # all_milestones hash with the milestones from each repo, and fire a callback only once 
-      # all asynchronous calls to github and memcache have completed
+      # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
-        get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/milestones?access_token='+user.access_token, (milestones) ->
+        get_from_github_with_redis '/repos/'+organization+'/'+_repo_name+'/milestones?access_token='+user.access_token, (milestones) ->
 
           # only add if its a proper array with length
           if milestones.length
@@ -84,10 +84,10 @@ exports.organization_product_labels = (user, callback) ->
       # get all the labels in this repo
       # used a closure so we could keep reference to the repo_name, populate the 
       # all_product_labels hash with the labels from each repo, and fire a callback only once 
-      # all asynchronous calls to github and memcache have completed
+      # all asynchronous calls to github and redis have completed
       ( ->
         _repo_name = repo_name
-        get_from_github_with_memcached '/repos/'+organization+'/'+_repo_name+'/labels?access_token='+user.access_token, (labels) ->
+        get_from_github_with_redis '/repos/'+organization+'/'+_repo_name+'/labels?access_token='+user.access_token, (labels) ->
 
           # only add if its a proper array with length
           if labels.length
@@ -105,7 +105,7 @@ exports.organization_product_labels = (user, callback) ->
 
 all_repo_names = (user, callback) ->
   repo_names = []
-  get_from_github_with_memcached '/orgs/'+organization+'/repos?access_token='+user.access_token, (repos) ->
+  get_from_github_with_redis '/orgs/'+organization+'/repos?access_token='+user.access_token, (repos) ->
 
     # only add if its a proper array with length
     if repos?.length
@@ -119,17 +119,17 @@ all_repo_names = (user, callback) ->
 
 
 # get data from github, with a 10 minute cache
-get_from_github_with_memcached = (path_with_params, callback) ->
+get_from_github_with_redis = (path_with_params, callback) ->
 
   # name space it - because we have shared cache servers  
   cache_key = "doghouse|github|#{path_with_params}"
   
-  # first try memcached
-  memcache.get cache_key, (result) ->
+  # first try redis
+  redis.get cache_key, (result) ->
 
     if result?
 
-      # parse the result which is already in memcache
+      # parse the result which is already in redis
       response = []
       try
         response = JSON.parse result
@@ -157,6 +157,6 @@ get_from_github_with_memcached = (path_with_params, callback) ->
         # send the result back via the callback
         callback result
 
-        # store the response in memcached for next time (up to 10 minutes)
+        # store the response in redis for next time (up to 10 minutes)
         cache = JSON.stringify result
-        memcache.set cache_key, cache, 600
+        redis.set cache_key, cache, 600
