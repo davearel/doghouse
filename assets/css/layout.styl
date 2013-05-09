@@ -1,17 +1,38 @@
+html
+  position relative
+  min-height 100%
+
 body
   padding-top 63px
+  margin 0 0 60px
+  min-height 100%
 
-h1, h2, h3
-  font-family pt-sans
-  font-weight normal
+h1, h2, h3, h4
+  font-family open-sans
+  font-weight 300
   font-size 32px
   padding 0
-  margin 0
+  margin 0 0 10px
 
 h3
   font-size 21px
   line-height 26px
   color grey_6
+
+  &.underline
+    border-bottom 2px solid grey_e
+    padding-bottom 12px
+    margin-bottom 20px
+
+h4
+  font-size 18px
+  margin-bottom 15px
+
+a
+  color bblue
+
+p.grey
+  color grey_9
 
 [class^="icon-"], [class*=" icon-"]
   background-image url("../images/glyphicons-halflings.png")
@@ -28,14 +49,14 @@ h3
 .content
   width 940px
   margin 0 auto
-  overflow visible
+  overflow hidden
 
 .grey-bg
   background grey_fa
   border-top 1px solid grey_e
 
 .hero-unit
-  padding 40px
+  padding 40px 0 50px
   margin-bottom 0
   background white
 
@@ -84,8 +105,8 @@ h3
 
       .brand
         background url(../images/logo.svg) 0 50% no-repeat
-        font-family pt-sans
-        font-weight bold
+        font-family open-sans
+        font-weight 300
         color white
         font-size 24px
         line-height 60px
@@ -94,20 +115,27 @@ h3
 
       .nav
         height 60px
+        font-family open-sans
 
         li
           height 60px
 
           a
-            background url(../images/nav-icons.svg) 25px 20px no-repeat
-            padding 0 25px 0 53px
+            padding 0 25px
             display block
             height 100%
             line-height 60px
             color grey_9
-            font-size 16px
+            font-size 14px
             border-left 1px solid #3b3b3b
             text-shadow none
+
+            &.issues
+              background url(../images/nav-icons.svg) 25px 20px no-repeat
+              padding-left 53px
+
+            &:hover
+              color #fff
 
             .caret
               margin 28px 0 0 10px
@@ -124,15 +152,64 @@ h3
               color grey_6
               border 0
 
+          &:hover
+            background grey_3
+
       .navbar-form
         margin-top 8px
         .btn
           box-shadow none
 
+.left-nav
+  width 240px
+  float left
+
+  ul
+    list-style none
+    margin 0
+
+    li
+      padding 0
+      margin 0
+
+      &.active
+        a
+          color grey_6
+          font-weight bold
+          border-right 0
+          background white
+
+      &:last-child
+        border-bottom 0
+
+      a
+        color bblue
+        font-size 14px
+        text-decoration none
+        line-height 60px
+        padding-left 20px
+        display block
+        border 1px solid grey_e
+        border-top 0
+
+        &:hover
+          background white
+
+.content .container
+  background white
+  width 670px
+  padding 30px 0 30px 30px
+  float left
+
 footer
   background grey_e
-  height 60px
   border-top 1px solid grey_d
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  overflow hidden
 
   p.copyright
     line-height 60px
@@ -142,7 +219,7 @@ footer
 
   thead
     font-size 21px
-    font-family pt-sans
+    font-family open-sans
     color grey_6
 
     th

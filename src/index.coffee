@@ -37,7 +37,7 @@ app.use (req, res, next) ->
 
 # Sessions and cookies
 app.use(express.cookieParser( settings.get 'cookie_secret' ))
-  
+
 app.use(express.cookieSession(
   secret : settings.get('session_secret')
   maxAge : new Date(Date.now() + 3600000)
