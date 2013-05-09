@@ -1,0 +1,140 @@
+extends ../layout
+block hero_unit
+  .content.grey-bg
+    include _sidenav
+
+    .container
+
+      h3.underline Chrome Extension
+
+      span Marty got annoyed with how long it took him to search for a user on our Admin pages from another page so he hacked together a Chrome Extension one day to speed up the flow. (Scroll down for install instructions)</span><br><br>
+
+      #download
+
+        h3.underline Downloads
+
+        ul
+          li
+            a(href="http://chrome.bellycard.com/permission_fix.zip", type="application/zip") OSX Permission Fix
+          li
+            a(href="http://chrome.bellycard.com/builds/belly-admin-chrome-extension-1.3.crx", type="application/x-chrome-extension") Latest Version (1.3)
+        br
+
+        h3.underline Example Usage Screenshots
+
+        span Say you get an email that requires you to look up some user with an email address: addella@aol.com
+        img(src="http://chrome.bellycard.com/images/a.png")
+        br
+
+        span Right-click on some selected text and select: Search users for 'addella@aol.com'
+        img(src="http://chrome.bellycard.com/images/b.png")
+        br
+
+        span And a new tab will open to the Belly Admin page with the search results for 'addella@aol.com'
+        img(src="http://chrome.bellycard.com/images/c.png")
+
+      #instructions
+
+        h3.underline Installing the Extension (on Mac, with auto-updates)
+
+        ul
+          li.permission_link
+            span 1
+            | Download the 
+            a(href="permission_fix.zip", type="application/zip") OSX Permission Fix
+          li
+            span 2
+            | Navigate to the folder you downloaded permission_fix.zip to.
+          li
+            span 3
+            | Double-click on the permission_fix.zip file to unzip it.
+            br
+            img(src="http://chrome.bellycard.com/images/d.png")
+          li
+            span 4
+            | A new file named 'Belly Chrome Permission Fix' should appear.
+            br
+            img(src="http://chrome.bellycard.com/images/e.png")
+          li
+            span 5
+            | Double-click on 'Belly Chrome Permission Fix' to run it. If a dialog appears saying "'Belly Chrome Permission Fix' is an application downloaded from the Internet. Are you sure you want to open it?", click 'Open'.
+          li
+            span 6
+            | When the 'Setup Chrome Extension?' popup shows up, click 'Yup' and wait for Chrome to quit then open back up.
+          li.latest_link
+            span 7
+            | Download the 
+            a(href="http://chrome.bellycard.com/builds/belly-admin-chrome-extension-1.3.crx", type="application/x-chrome-extension") latest version (1.3) of the extension.
+          li
+            span 8
+            | Chrome should show a warning in the downloads bar asking 'Are you sure you want to continue?'. Click 'Continue'.
+            br
+            img(src="http://chrome.bellycard.com/images/f.png")
+          li
+            span 9
+            | Chrome should show an "Add 'Belly Admin'?" popup. Click 'Add'.
+            br
+            img(src="http://chrome.bellycard.com/images/g.png")
+          li
+            span 10
+            | After you click, you should see a popup on the right-hand side saying: "Belly Admin has been added to Chrome".
+
+        br
+
+        h3.underline Installing the Extension (on Windows)
+
+        ul
+          li.latest_link
+            span 1
+            | Download the
+            a(href="http://chrome.bellycard.com/builds/belly-admin-chrome-extension-1.3.crx", type="application/x-chrome-extension") latest version (1.3)
+            | of the extension. If you see a warning from Chrome about apps, extensions, etc., ignore it.
+          li
+            span 2
+            | Navigate to Chrome's Extension settings (Window-&gt;Extensions)
+          li
+            span 3
+            | Drag the .crx file downloaded in the first step into the Extensions window (you can grab it from the Downloads bar on the bottom). When you see the 'Drop to Install' box appear, drop the file.
+
+        br
+        br
+
+        h3.underline Using the Extension
+
+        h4 Right-click
+        ul
+          li
+            span 1
+            | After the extension is installed, select some text on any web page.
+          li
+            span 2
+            | Right click on the selected text and you should see the 'Belly Admin' in the context menu.
+          li
+            span 3
+            | Select 'Belly Admin' followed by whatever you want to search and a new window should open with the results in Admin.
+
+        h4 THE BUTTON
+        ul
+          li
+            span 1
+            | After the extension is installed, you'll see this button appear next to the address bar:
+            br
+            img(src="http://chrome.bellycard.com/images/h.png")
+          li
+            span 2
+            | Click on the button to show the search popup:
+            br
+            img(src="http://chrome.bellycard.com/images/i.png")
+          li
+            span 2
+            | Enter the text to search for in the text field and click on a button. Example: Enter the word 'belly' and click the 'Businesses' button to get search results for businesses named Belly.
+
+        h3.underline Questions?
+        p
+          strong Having issues installing or using the extension?
+          br
+          | Have suggestions? Send an email to 
+          a(href="mailto:marty@bellycard.com") marty@bellycard.com
+          |.
+
+    .clearfix

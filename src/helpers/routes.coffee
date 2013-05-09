@@ -54,3 +54,16 @@ exports.update_blog_post_path = (blog_post) ->
 exports.delete_blog_post_path = (blog_post) ->
   '/blog_posts/' + blog_post.id + '/delete'
 
+# tools
+# --------------------------------------------
+exports.tools_path = () ->
+  '/tools'
+
+exports.tools_signatures_path = () ->
+  '/tools/signatures'
+
+exports.tools_chrome_path = () ->
+  '/tools/chrome'
+
+exports.tools_merchant_guidelines_path = () ->
+  '/tools/merchant_guidelines'

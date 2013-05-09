@@ -1,0 +1,14 @@
+.left-nav
+  ul
+
+    li(class="#{page=='getting_started' ? 'active' : ''}")
+      a(href=routes.tools_path()) Getting Started
+
+    li(class="#{page=='signatures' ? 'active' : ''}")
+      a(href=routes.tools_signatures_path()) Signature Builder
+
+    li(class="#{page=='chrome' ? 'active' : ''}")
+      a(href=routes.tools_chrome_path()) Chrome Extension
+
+    li(class="#{page=='merchant_guidelines' ? 'active' : ''}")
+      a(href=routes.tools_merchant_guidelines_path()) Merchant Guidelines
