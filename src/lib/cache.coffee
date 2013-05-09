@@ -16,7 +16,7 @@ exports.set = (cache_key, value, expires, callback) ->
   if expires?
     client.expire cache_key, expires
 
-prepare_connection = () ->
+prepare_connection = ->
   if process.env.REDISTOGO_URL
     rtg   = url.parse process.env.REDISTOGO_URL
     client = redis.createClient rtg.port, rtg.hostname
