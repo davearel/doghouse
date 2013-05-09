@@ -2,7 +2,7 @@
 html(lang='en')
   head
     meta(charset='utf-8')
-    title title
+    title Doghouse x Belly
     meta(name='description', content='')
     meta(name='author', content='')
     // Mobile Specific
@@ -24,11 +24,13 @@ html(lang='en')
           .nav-collapse.collapse
             ul.nav
               li
-                a(href=routes.issues_path()) Issues
+                a(href=routes.issues_path()).issues Issues
               li
                 a(href=routes.events_path()) Events
               li
                 a(href=routes.blog_posts_path()) Blog Posts
+              li
+                a(href=routes.tools_path()) Tools
             form.navbar-form.pull-right
               if loggedIn()
                 a(href=routes.logout_path()).btn Sign out
