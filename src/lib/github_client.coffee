@@ -30,7 +30,7 @@ exports.organization_issues = (user, callback) ->
       ( ->
         _repo_name = repo_name
         get_from_github_with_cache '/repos/'+organization+'/'+_repo_name+'/issues?per_page=100&access_token='+user.access_token, (issues) ->
-          console.log issues.length
+
           # only add if its a proper array with length
           if issues.length
 
