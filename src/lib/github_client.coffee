@@ -134,7 +134,7 @@ get_from_github_with_cache = (path_with_params, callback) ->
   # first try cache
   cache.get cache_key, (result) ->
 
-    if false #result?
+    if result?
 
       # parse the result which is already in cache
       response = []
