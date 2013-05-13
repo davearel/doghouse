@@ -29,8 +29,8 @@ exports.organization_issues = (user, callback) ->
       # all asynchronous calls to github and cache have completed
       ( ->
         _repo_name = repo_name
-        get_from_github_with_cache '/repos/'+organization+'/'+_repo_name+'/issues?access_token='+user.access_token, (issues) ->
-
+        get_from_github_with_cache '/repos/'+organization+'/'+_repo_name+'/issues?per_page=100&access_token='+user.access_token, (issues) ->
+          console.log issues.length
           # only add if its a proper array with length
           if issues.length
 
@@ -134,7 +134,7 @@ get_from_github_with_cache = (path_with_params, callback) ->
   # first try cache
   cache.get cache_key, (result) ->
 
-    if result?
+    if false #result?
 
       # parse the result which is already in cache
       response = []
