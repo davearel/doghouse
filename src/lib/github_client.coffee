@@ -14,7 +14,7 @@ exports.users = (user, callback) ->
   get_from_github_with_cache '/orgs/'+organization+'/members?access_token='+user.access_token, callback
 
 exports.repos = (user, callback) -> 
-  get_from_github_with_cache '/orgs/'+organization+'/repos?access_token='+user.access_token, callback
+  get_from_github_with_cache '/orgs/'+organization+'/repos?per_page=100&access_token='+user.access_token, callback
 
 exports.organization_issues = (user, callback) -> 
   all_issues = []
@@ -112,7 +112,7 @@ exports.organization_product_labels = (user, callback) ->
 
 all_repo_names = (user, callback) ->
   repo_names = []
-  get_from_github_with_cache '/orgs/'+organization+'/repos?access_token='+user.access_token, (repos) ->
+  get_from_github_with_cache '/orgs/'+organization+'/repos?per_page=100&access_token='+user.access_token, (repos) ->
 
     # only add if its a proper array with length
     if repos?.length
