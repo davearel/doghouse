@@ -92,6 +92,8 @@ exports.organization_milestones = (user, callback) ->
 
 exports.organization_product_labels = (user, callback) -> 
   all_product_labels = []
+  # dictionary to ensure unique labels
+  projects_dictionary = {}
   repos_processed_count = 0
   all_repo_names user, (repo_names) ->
 
@@ -110,8 +112,13 @@ exports.organization_product_labels = (user, callback) ->
 
             for label in labels
               label_name = label['name']?.toLowerCase()
-              if label_name.substring(0, 1) is ":"
-                all_product_labels.push { name: label_name.replace(':', '') }
+              if label_name.substring(0, 1) is ':'
+                project_name = label_name.replace(':', '')
+
+              # check to see if we've already added this label
+              unless projects_dictionary[project_name]
+                projects_dictionary[project_name] = true
+                all_product_labels.push { name: project_name }
 
           repos_processed_count++
 
