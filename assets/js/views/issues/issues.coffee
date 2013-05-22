@@ -3,8 +3,12 @@ class Issue extends Backbone.View
 
   render: -> 
     _.each @model.get('labels'), (label) =>
-      if label.name.toLowerCase() is 'bug' then @$el.addClass('labeled bug')
-      if label.name.toLowerCase() is 'priority' then @$el.addClass('labeled priority')
+      name = label.name.toLowerCase()
+      if name is 'bug' then @$el.addClass('labeled bug')
+      if name is 'priority' then @$el.addClass('labeled priority')
+      if name is 'blocked' then @$el.addClass('labeled blocked')
+
+    if @model.get('is_pull') then @$el.addClass('labeled pull')
 
     @$el.html JadeTemplates['templates/issues/issues']( @model.toJSON() )
 

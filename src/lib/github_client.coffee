@@ -14,7 +14,16 @@ exports.users = (user, callback) ->
   get_from_github_with_cache '/orgs/'+organization+'/members?access_token='+user.access_token, callback
 
 exports.repos = (user, callback) -> 
-  get_from_github_with_cache '/orgs/'+organization+'/repos?per_page=100&access_token='+user.access_token, callback
+  all_repos = []
+  get_from_github_with_cache '/orgs/'+organization+'/repos?per_page=100&access_token='+user.access_token, (repos) ->
+    
+    for repo, i in repos
+
+      # ensure only repos with a name get added
+      if repo.name and repo.open_issues then all_repos.push repo
+
+    callback all_repos
+
 
 exports.organization_issues = (user, callback) -> 
   all_issues = []
@@ -101,8 +110,8 @@ exports.organization_product_labels = (user, callback) ->
 
             for label in labels
               label_name = label['name']?.toLowerCase()
-              if label_name.substring(0, 2) is "p:"
-                all_product_labels.push { name: label_name.replace('p:', '') }
+              if label_name.substring(0, 1) is ":"
+                all_product_labels.push { name: label_name.replace(':', '') }
 
           repos_processed_count++
 
@@ -120,7 +129,7 @@ all_repo_names = (user, callback) ->
       for repo, i in repos
 
         # ensure only repos with a name get added
-        if repo.name then repo_names.push repo.name
+        if repo.name and repo.open_issues then repo_names.push repo.name
 
     callback repo_names
 

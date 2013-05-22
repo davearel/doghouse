@@ -7,6 +7,13 @@ class App.Github.Issue extends Backbone.Model
 
   computeAttributes: ->
     @set 'created_at_formatted', moment( @get('created_at') ).from( moment() )
+    if @get('pull_request').html_url? then @set('is_pull', true)
+    project = _.find @get('labels'), (label) -> 
+      label.name.substring(0,1) is ':'
+    if project?
+      @set 'project', project.name.replace(':', '')
+    else
+      @set 'project', false
 
   # A bit of a hacky way to check against each issue
   # and mark it as filtered or not
@@ -36,7 +43,7 @@ class App.Github.Issue extends Backbone.Model
       unless _.isEmpty projects
         does_contain = false
         _.each @get('labels'), (label) ->
-          if _.contains projects, label.name.toLowerCase().replace('p:', '')
+          if _.contains projects, label.name.toLowerCase().replace(':', '')
             does_contain = true
         return does_contain
 
