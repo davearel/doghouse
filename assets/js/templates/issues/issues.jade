@@ -19,8 +19,9 @@
   span.label
     a(href='#{html_url}') Issue ##{number}
   
-  span.label.pull-right.yellow.outline
-    a(href='#{html_url}') Project Name
+  - if (project)
+    span.label.pull-right.yellow.outline
+      a(href='#{html_url}') #{project}
 
   - if (milestone)
     span.label.pull-right.orange.outline
