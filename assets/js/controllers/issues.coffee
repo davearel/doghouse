@@ -3,13 +3,13 @@ class App.Controller.Issues
   # tracks the filter collection loaded
   filters_loaded: 0
 
-  constructor: ->
+  constructor: (@filter_params) ->
 
     # stores our github view and data instances
     App.github = {}
 
     # stores our current search filters
-    App.github.search_filters = new App.Github.SearchFilters()
+    App.github.search_filters = new App.Github.SearchFilters @filter_params
     
     # get our github users
     App.github.users = new App.Github.Users()
@@ -30,7 +30,7 @@ class App.Controller.Issues
     # create the issues view items
     App.github.issues = new App.Github.Issues()
     App.github.issues.fetch
-      success: ->
+      success: =>
         # the issue view
         issues_view = new App.View.GithubIssues
           el: '.issue-list'
@@ -58,3 +58,8 @@ class App.Controller.Issues
         el: '.applied-filters'
       applied_filters.render()
 
+  resetFilterParams: (params) =>
+    if params?
+      App.github.search_filters.set params
+    else
+      App.github.search_filters.reset()

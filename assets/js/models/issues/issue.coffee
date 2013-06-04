@@ -5,6 +5,8 @@ class App.Github.Issue extends Backbone.Model
 
     App.github.search_filters.on 'add:filter remove:filter', @checkFilter
 
+    @checkFilter()
+
   computeAttributes: ->
     @set 'created_at_formatted', moment( @get('created_at') ).from( moment() )
     if @get('pull_request').html_url? then @set('is_pull', true)
@@ -17,7 +19,7 @@ class App.Github.Issue extends Backbone.Model
 
   # A bit of a hacky way to check against each issue
   # and mark it as filtered or not
-  checkFilter: (o) =>
+  checkFilter: =>
     filters = App.github.search_filters
     users = filters.get('users')
     milestones = filters.get('milestones')

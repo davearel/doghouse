@@ -5,11 +5,9 @@
 #= require_tree controllers
 
 #= require_tree templates
-#= require_tree view_models
 #= require_tree views
+#= require router
 
-# Decide what controller use based on URL path
-switch document.location.pathname
-  
-  when '/issues'
-    new App.Controller.Issues()
+App.controller = {}
+App.router = new App.Router()
+Backbone.history.start({pushState: true})

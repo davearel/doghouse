@@ -14,6 +14,10 @@ class App.Github.SearchFilters extends Backbone.Model
     array = @get key
     array.push value
     @set key, array
+
+    # reflect the paramters in the url
+    App.router.navigate App.router.toFragment 'issues', @toJSON()
+
     # for some reason, the 'change' event does 
     # not get triggered automatically
     @trigger 'add:filter', { key: key, value: value }
@@ -23,6 +27,10 @@ class App.Github.SearchFilters extends Backbone.Model
     array = @get key
     array = _.without array, value
     @set key, array
+
+    # reflect the paramters in the url
+    App.router.navigate App.router.toFragment 'issues', @toJSON()
+
     # for some reason, the 'change' event does 
     # not get triggered automatically
     @trigger 'remove:filter', { key: key, value: value }
@@ -37,4 +45,6 @@ class App.Github.SearchFilters extends Backbone.Model
   reset: ->
     @clear()
     @set @defaults()
+    # reflect the paramters in the url
+    App.router.navigate App.router.toFragment('issues', @toJSON())
     @trigger 'remove:filter', key: 'all'
