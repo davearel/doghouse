@@ -4,7 +4,7 @@ class App.View.AppliedFilters extends Backbone.View
     'click .remove': 'clear'
 
   initialize: ->
-    App.github.search_filters.on 'add:filter remove:filter', @render
+    App.on 'change:filter', @render
 
   render: =>
     @$el.html JadeTemplates['templates/issues/applied_filters'] categories: App.github.search_filters.toJSON()

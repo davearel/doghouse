@@ -2,10 +2,10 @@ class App.Github.SearchFilters extends Backbone.Model
 
   # stores an array of each filter property
   defaults: ->
-    'users': []
-    'milestones': []
-    'repos': []
-    'projects': []
+    'user': []
+    'milestone': []
+    'repo': []
+    'project': []
 
   # gets the current value of
   # a filter property and pushes the
@@ -20,7 +20,7 @@ class App.Github.SearchFilters extends Backbone.Model
 
     # for some reason, the 'change' event does 
     # not get triggered automatically
-    @trigger 'add:filter', { key: key, value: value }
+    App.trigger 'change:filter'
 
   # removes value from array
   remove: (key, value) ->
@@ -33,7 +33,7 @@ class App.Github.SearchFilters extends Backbone.Model
 
     # for some reason, the 'change' event does 
     # not get triggered automatically
-    @trigger 'remove:filter', { key: key, value: value }
+    App.trigger 'change:filter'
 
 
   # check to see if all values are empty or not
@@ -42,9 +42,14 @@ class App.Github.SearchFilters extends Backbone.Model
       return true unless _.isEmpty value
     return false
 
+  merge: (data) ->
+    @clear()
+    @set _.extend @defaults(), data
+    App.trigger 'change:filter'
+
   reset: ->
     @clear()
     @set @defaults()
     # reflect the paramters in the url
     App.router.navigate App.router.toFragment('issues', @toJSON())
-    @trigger 'remove:filter', key: 'all'
+    App.trigger 'change:filter'

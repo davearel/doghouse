@@ -3,7 +3,7 @@ class App.Github.Issue extends Backbone.Model
   initialize: ->
     @computeAttributes()
 
-    App.github.search_filters.on 'add:filter remove:filter', @checkFilter
+    App.on 'change:filter', @checkFilter
 
     @checkFilter()
 
@@ -21,10 +21,10 @@ class App.Github.Issue extends Backbone.Model
   # and mark it as filtered or not
   checkFilter: =>
     filters = App.github.search_filters
-    users = filters.get('users')
-    milestones = filters.get('milestones')
-    repos = filters.get('repos')
-    projects = filters.get('projects')
+    users = filters.get('user')
+    milestones = filters.get('milestone')
+    repos = filters.get('repo')
+    projects = filters.get('project')
 
     doesPass = =>
       # if users filter is not empty

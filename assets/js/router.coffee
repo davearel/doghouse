@@ -4,7 +4,7 @@ class App.Router extends Backbone.Router
     'issues': 'issues'
 
   issues: (params) ->
-    console.log App.controller
+    # Check if the controller has been instantiated or not
     if _.isEmpty App.controller
       App.controller = new App.Controller.Issues params
     else

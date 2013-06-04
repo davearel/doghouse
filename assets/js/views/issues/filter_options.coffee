@@ -8,7 +8,7 @@ class Option extends Backbone.View
   selected: false
 
   initialize: ->
-    App.github.search_filters.on 'remove:filter', @checkIfRemoved
+    App.on 'remove:filter', @checkIfRemoved
 
   checkIfRemoved: (o) =>
     if o.key is 'all' or o.key is @$el.data('key')

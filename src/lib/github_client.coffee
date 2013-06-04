@@ -20,7 +20,9 @@ exports.repos = (user, callback) ->
     for repo, i in repos
 
       # ensure only repos with a name get added
-      if repo.name and repo.open_issues then all_repos.push repo
+      if repo.name and repo.open_issues
+        repo.type = 'repo'
+        all_repos.push repo
 
     callback all_repos
 
@@ -82,7 +84,7 @@ exports.organization_milestones = (user, callback) ->
               # check to see if we've already added this milestone
               unless milestones_dictionary[title]
                 milestones_dictionary[title] = true
-                unique_milestones.push { title: title }
+                unique_milestones.push { title: title, type: 'milestone' }
 
           repos_processed_count++
 
@@ -118,7 +120,7 @@ exports.organization_product_labels = (user, callback) ->
               # check to see if we've already added this label
               unless projects_dictionary[project_name]
                 projects_dictionary[project_name] = true
-                all_product_labels.push { name: project_name }
+                all_product_labels.push { name: project_name, type: 'project' }
 
           repos_processed_count++
 

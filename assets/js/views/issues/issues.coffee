@@ -16,7 +16,7 @@ class Issue extends Backbone.View
 class App.View.GithubIssues extends Backbone.View
 
   initialize: ->
-    App.github.search_filters.on 'add:filter remove:filter', @render
+    App.on 'change:filter', @render
 
   renderItem: (model) =>
 

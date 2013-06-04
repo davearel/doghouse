@@ -60,6 +60,7 @@ class App.Controller.Issues
 
   resetFilterParams: (params) =>
     if params?
-      App.github.search_filters.set params
+      App.github.search_filters.merge params
+      App.trigger 'change:filter'
     else
       App.github.search_filters.reset()
